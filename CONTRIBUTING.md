@@ -1,41 +1,27 @@
 # Contributing — RKA Knowledge
 
 ## Prinsip
-- **PDF-only:** Jangan commit `*.pptx/*.ppt/*.ppsx/*.docx`. Convert dulu via `./scripts/convert_ppt_to_pdf.sh` (LibreOffice headless). Original simpan di source backup, tidak di repo.
-- **Kebab-case & nama lengkap:** `aljabar-linear` bukan `alin`, `basis-data` bukan `basisdata`, `kecerdasan-komputasional` bukan `kk`, `konsep-kecerdasan-artifisial` bukan `kka`, `matematika-diskrit` bukan `matdis`, `struktur-data` bukan `strukdat`, `teori-graf` bukan `tegrf`, `perancangan-dan-analisis-algoritma` bukan `paa`, `probabilitas-dan-statistika` bukan `probstat`, `dasar-pemrograman` bukan `dasprog`, `data-mining` bukan `datmin`. Contoh: `07. Adversarial Search.pptx` → `07-adversarial-search.pdf` (lower, kebab).
-- **Flat:** `courses/<slug>/` tanpa `semester/`. Slug: `aljabar-linear, basis-data, bluecamp, dasar-pemrograman, data-mining, kalkulus-2, kecerdasan-komputasional, konsep-kecerdasan-artifisial, machine-learning, matematika-diskrit, perancangan-dan-analisis-algoritma, probabilitas-dan-statistika, struktur-data, teori-graf` (14).
-- **ML/DM first-class:** `external/Modul-ML-RKA` → `courses/machine-learning/materi/`, `external/Modul-DM-RKA` → `courses/data-mining/modul/` (sync via `scripts/sync-external.sh`).
-- **No junk:** Jangan commit `.venv/`, `venv-ppt/`, `__pycache__/`, `.godot/`, `__MACOSX/`, `*.lck`, `*.pyc`, `instance/stroke.db`.
-- **LFS:** `*.pdf, *.zip, *.mp4, *.m4a` otomatis LFS (`.gitattributes`).
+- **Hanya pembelajaran:** Tidak ada script/tooling selain tugas.
+- **Kebab-case & nama lengkap:** `aljabar-linear` bukan `alin`, `kecerdasan-komputasional` bukan `kk`, `konsep-kecerdasan-artifisial` bukan `kka`, dll.
+- **Flat:** `courses/<slug>/` tanpa `semester/` (14 mata kuliah).
+- **No junk:** Jangan commit `.venv/`, `__pycache__/`, `.godot/`, `__MACOSX/`.
+- **LFS:** `*.pdf, *.zip, *.mp4, *.m4a` otomatis LFS.
 
 ## Menambah Mata Kuliah
 ```bash
 mkdir -p courses/<slug-baru>/{materi,slides/pdf,praktikum}
-# copy & convert
-./scripts/convert_ppt_to_pdf.sh
-# tulis courses/<slug-baru>/README.md pakai template docs/_template/README.md
-```
-
-## Update External
-```bash
-./scripts/sync-external.sh
-# cat external/ATTRIBUTION.md — update hash
+# tulis README.md
 ```
 
 ## Commit
 ```
-feat(course): add kka EAS 2024 pdf
-fix(slides): re-convert probstat legacy ppt
-docs: update courses/teori-graf README
+feat(course): add e.g., struktur-data tugas baru
 ```
 
-## Validasi Sebelum Push
+## Validasi
 ```bash
-find courses -name "*.pptx" -o -name "*.ppt" | wc -l  # harus 0
-find . -type d -name ".venv" | wc -l  # 0
-git lfs ls-files | head
-./scripts/inventory.py | head -n 50
+find courses -name "*.pptx" | wc -l  # harus 0
 ```
 
 ## Akses
-Repo **private — limited**. Minta invite ke owner via `gh api repos/<owner>/rka-knowledge/collaborators/<username> -X PUT --field permission=push`.
+Repo **private — limited**.

@@ -53,3 +53,6 @@ instance/
 # Large generated media - keep via LFS, but ignore temp
 *.mp4.tmp
 *.m4a.tmp
+scripts/
+docs/
+external/

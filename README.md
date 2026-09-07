@@ -7,7 +7,7 @@
 [![LFS](https://img.shields.io/badge/git--lfs-enabled-lightgrey)](#git-lfs)
 [![Private](https://img.shields.io/badge/access-private--limited-red)](#akses)
 
-Repo ini mengumpulkan **14 mata kuliah + assets** dari `/home/data/kuliah/rka` plus **2 modul KCV sebagai mata kuliah first-class** (bukan sekadar `external/`). Semua slide PPT/PPSX/PPTX/DOCX sudah di-convert ke **PDF** (`courses/*/slides/pdf/`) — tidak menyimpan original PPT (backup tetap di source).
+Repo ini mengumpulkan **14 mata kuliah** dari `/home/data/kuliah/rka` (termasuk Data Mining & Machine Learning dari KCV). Semua slide PPT/PPSX/PPTX/DOCX sudah di-convert ke **PDF** (`courses/*/slides/pdf/`) — hanya pembelajaran.
 
 ## Struktur
 
@@ -15,10 +15,7 @@ Repo ini mengumpulkan **14 mata kuliah + assets** dari `/home/data/kuliah/rka` p
 rka-knowledge/
 ├── README.md
 ├── CONTRIBUTING.md
-├── docs/{panduan-konversi.md,_template/}
-├── external/{Modul-ML-RKA,Modul-DM-RKA,ATTRIBUTION.md}  # vendor raw (preserve upstream)
-├── scripts/{convert_ppt_to_pdf.sh,sync-external.sh,inventory.py}
-└── courses/                          # 14 first-class, flat (tanpa semester)
+└── courses/                          # 14 mata kuliah, hanya pembelajaran (tanpa docs/scripts/external)
     ├── aljabar-linear/               # Aljabar Linear
     ├── basis-data/                   # Basis Data
     ├── bluecamp/                     # Bluecamp Day 2 — Studi Literatur
@@ -35,7 +32,7 @@ rka-knowledge/
     └── teori-graf/                   # Teori Graf
 ```
 
-> **Desain:** `external/` menyimpan snapshot mentah upstream (untuk attribution & sync). `courses/data-mining` & `courses/machine-learning` adalah **kurasi first-class** yang berisi copy terstruktur dari `external/` — jadi ML/DM diperlakukan **sama** seperti mata kuliah lain, tidak terpisah.
+> **Desain:** `courses/data-mining` & `courses/machine-learning` sudah dikurasi dari KCV — sejajar dengan mata kuliah lain.
 
 Tiap `courses/<slug>/` baku:
 
@@ -68,33 +65,15 @@ courses/<slug>/
 | 11 | `perancangan-dan-analisis-algoritma` | Perancangan dan Analisis Algoritma | Portofolio `docx→pdf` | [`perancangan-dan-analisis-algoritma/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf`](courses/perancangan-dan-analisis-algoritma/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf) |
 | 12 | `probabilitas-dan-statistika` | Probabilitas dan Statistika | `slides/pdf/{uji-parameter-1-populasi,uji-hipotesis-2-populasi,one-way-anova}`, `tabel/{F0-05,T,Z}` | ✓ 3 pdf |
 | 13 | `struktur-data` | Struktur Data | `tugas/{sandbox,tugas1-4}`, `assets/audio1053355768.m4a` 33M, `tugas2/media` (95M) | — |
-| 14 | `teori-graf` | Teori Graf | `materi/{FP_Tegraf.py,HeFDN_Analysis.pdf,viewer.html}`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`teori-graf/slides/pdf/`](courses/teori-graf/slides/pdf/) (7 pdf) |
+| 14 | `teori-graf` | Teori Graf | `materi/{FP_Tegraf.py,HeFDN_Analysis.pdf}`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`teori-graf/slides/pdf/`](courses/teori-graf/slides/pdf/) (7 pdf) |
 
 Detail per-course: buka `courses/<slug>/README.md`.
 
 ## Alur Folder — Kenapa Begini?
 
-- **Flat `courses/` (tanpa semester)** sesuai request — enak discan, tidak perlu tebak semester. Urutan di tabel adalah navigasi utama.
-- **Nama lengkap, format benar:** `aljabar-linear` bukan `alin`, `basis-data` bukan `basisdata`, `kecerdasan-komputasional` bukan `kk`, `konsep-kecerdasan-artifisial` bukan `kka`, `matematika-diskrit` bukan `matdis`, dst. Semua slug kebab-case, judul README Title Case.
-- **ML & DM jadi first-class** (`courses/machine-learning`, `courses/data-mining/modul`) — tidak lagi “external doang”. `external/` tetap ada sebagai **arsip vendor mentah** (untuk audit & `sync-external.sh`), tapi yang dibaca sehari-hari adalah `courses/`.
-- **Tidak ada empty folder** — `assets/`, `slides/`, `materi/` kosong sudah dihapus.
-- **Kalkulus 2 dirapikan:** `polar.md`/`volue.md` → `materi/`, `modul/` tetap 11 md + `images/`.
-- **`_template` pindah** dari `courses/_template` → `docs/_template` (tidak mengotori listing mata kuliah).
-
-## Modul KCV — Treat Sama
-
-Dua modul KCV sekarang **simetris**:
-
-```
-external/Modul-ML-RKA  ──copy──►  courses/machine-learning/materi/
-external/Modul-DM-RKA  ──copy──►  courses/data-mining/modul/
-local data-mining Assets/ ────►  courses/data-mining/materi/Rangkuman...pdf
-```
-
-- `courses/data-mining` = `materi/` (lokal) + `modul/` (7 topik KCV)
-- `courses/machine-learning` = `materi/` (5 topik KCV: Supervised/Unsupervised/DL/RL/Deployment)
-
-Update upstream: `./scripts/sync-external.sh` otomatis update `external/` + `courses/*/materi|modul/`. Commit hash tercatat di `external/ATTRIBUTION.md`.
+- **Flat `courses/` (tanpa semester)** — enak discan, tidak perlu tebak semester.
+- **Nama lengkap:** `aljabar-linear` bukan `alin`, `kecerdasan-komputasional` bukan `kk`, dst. Semua slug kebab-case.
+- **Hanya pembelajaran:** Tidak ada `scripts/`/`docs/`/`external/` — sudah di-gitignore.
 
 ## Kebijakan PDF-only
 
@@ -130,11 +109,7 @@ teori-graf/slides/pdf/vision-board-1-0-final.pdf (4.0M)
 ```bash
 git clone <url> rka-knowledge
 cd rka-knowledge
-# tidak perlu --recurse-submodules (vendor copy, tapi sudah di courses/)
-# optional: re-run konversi
-./scripts/convert_ppt_to_pdf.sh
-# sync external + courses
-./scripts/sync-external.sh
+# Buka courses/<slug>/README.md
 ```
 
 ## Git LFS
@@ -155,7 +130,7 @@ Lihat [`CONTRIBUTING.md`](CONTRIBUTING.md). Penamaan file kebab-case, tidak comm
 
 ## Lisensi
 
-Konten kurasi internal untuk kuliah RKA. Modul external mengikuti lisensi upstream (lihat `external/*/README.md`). Hubungi KCV untuk lisensi spesifik.
+Konten kurasi internal untuk kuliah RKA.
 
 ---
 
