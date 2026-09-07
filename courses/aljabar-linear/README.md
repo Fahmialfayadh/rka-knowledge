@@ -1,4 +1,4 @@
-# Aljabar Linear (ALIN)
+# Aljabar Linear
 
 > Matkul dasar-aljabar untuk RKA — analisis data.
 

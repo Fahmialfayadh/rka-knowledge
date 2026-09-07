@@ -1,4 +1,4 @@
-# Dasar Pemrograman (Dasprog)
+# Dasar Pemrograman
 
 > 5 tugas pemrograman dasar — Python.
 

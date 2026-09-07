@@ -1,4 +1,4 @@
-# Perancangan dan Analisis Algoritma (PAA)
+# Perancangan dan Analisis Algoritma
 
 > Portofolio MK IF184401.
 

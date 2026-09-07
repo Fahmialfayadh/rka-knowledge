@@ -1,4 +1,4 @@
-# Struktur Data (Strukdat)
+# Struktur Data
 
 > BST, BFS/DFS, searching, queue/stack, plus simulasi manim.
 

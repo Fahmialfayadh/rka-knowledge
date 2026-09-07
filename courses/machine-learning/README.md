@@ -1,4 +1,4 @@
-# Machine Learning (ML) — RKA
+# Machine Learning
 
 > Kurikulum ML RKA — vendor copy dari [kcv-if/Modul-ML-RKA](https://github.com/kcv-if/Modul-ML-RKA) (`46e0089` main), diperlakukan setara dengan matkul lain (bukan sekadar `external/`).
 

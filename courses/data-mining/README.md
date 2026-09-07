@@ -1,4 +1,4 @@
-# Data Mining (Datmin) — RKA
+# Data Mining
 
 > Matkul Data Mining Semester 3 (4 SKS) — tahapan, praproses, class imbalance, ensemble, association, sequential, clustering, anomali. Diperlakukan setara dengan matkul lain: lokal + vendor copy KCV.
 
@@ -6,7 +6,7 @@
 - **Lokal:** `materi/Rangkuman Data Mining Week 1.pdf` (kurasi Week 1)
 - **Upstream:** [kcv-if/Modul-DM-RKA](https://github.com/kcv-if/Modul-DM-RKA) (`cfa1d6c` master)
 - **Vendor raw:** `external/Modul-DM-RKA/` (preserve original, 7 modul)
-- **Kurasi:** `courses/datmin/modul/` (copy terstruktur)
+- **Kurasi:** `courses/data-mining/modul/` (copy terstruktur)
 
 Lihat `external/ATTRIBUTION.md` & `external/Modul-DM-RKA/README.md` untuk CPMK & etika data.
 
@@ -58,5 +58,5 @@ Baca `external/Modul-DM-RKA/README.md` → Pernyataan Etika: gunakan dataset ber
 ## Sinkronisasi
 ```bash
 ./scripts/sync-external.sh
-# update external/ & courses/datmin/modul/
+# update external/ & courses/data-mining/modul/
 ```

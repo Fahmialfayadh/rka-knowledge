@@ -1,4 +1,4 @@
-# Kecerdasan Buatan — KKA
+# Konsep Kecerdasan Artifisial
 
 > Search, adversarial, CSP, fuzzy, FOL, plus project WAR (Godot+Python).
 

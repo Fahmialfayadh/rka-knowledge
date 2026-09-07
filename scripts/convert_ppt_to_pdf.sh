@@ -11,14 +11,14 @@ TMP_DIR="/tmp/rka-pdf-convert-$$"
 
 mkdir -p "$TMP_DIR"
 
-# Mapping: source pattern -> dest slug
+# Mapping: source pattern -> dest slug (nama lengkap, kebab-case)
 declare -A MAP=(
-  ["KK/ASSET_MATERI"]="kk"
-  ["kka"]="kka"
-  ["PAA"]="paa"
-  ["probstat"]="probstat"
-  ["tegrf"]="tegrf"
-  ["ppt_fp_tegraf"]="tegrf"
+  ["KK/ASSET_MATERI"]="kecerdasan-komputasional"
+  ["kka"]="konsep-kecerdasan-artifisial"
+  ["PAA"]="perancangan-dan-analisis-algoritma"
+  ["probstat"]="probabilitas-dan-statistika"
+  ["tegrf"]="teori-graf"
+  ["ppt_fp_tegraf"]="teori-graf"
 )
 
 # Collect files (exclude venv, .git, __pycache__, .godot)
@@ -79,12 +79,12 @@ find "$SRC_ROOT" -type f \( -iname "*.pptx" -o -iname "*.ppt" -o -iname "*.ppsx"
     slug="misc"
   fi
 
-  # Special case: docx PAA -> paa
-  if [[ "$src" == *"PAA"* ]]; then slug="paa"; fi
-  if [[ "$src" == *"probstat"* ]]; then slug="probstat"; fi
-  if [[ "$src" == *"tegrf"* ]] || [[ "$src" == *"ppt_fp_tegraf"* ]]; then slug="tegrf"; fi
-  if [[ "$src" == *"KK/"* ]]; then slug="kk"; fi
-  if [[ "$src" == *"kka/"* ]]; then slug="kka"; fi
+  # Special case overrides (nama lengkap)
+  if [[ "$src" == *"PAA"* ]]; then slug="perancangan-dan-analisis-algoritma"; fi
+  if [[ "$src" == *"probstat"* ]]; then slug="probabilitas-dan-statistika"; fi
+  if [[ "$src" == *"tegrf"* ]] || [[ "$src" == *"ppt_fp_tegraf"* ]]; then slug="teori-graf"; fi
+  if [[ "$src" == *"KK/"* ]]; then slug="kecerdasan-komputasional"; fi
+  if [[ "$src" == *"kka/"* ]]; then slug="konsep-kecerdasan-artifisial"; fi
 
   # Kebab-case output name: lower, spaces->-, dots->-, remove special
   out_name=$(echo "$norm_base" | sed -E 's/\.(pptx|ppt|ppsx|docx)$//I' | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')

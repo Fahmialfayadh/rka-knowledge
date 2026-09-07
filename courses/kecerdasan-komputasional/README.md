@@ -1,4 +1,4 @@
-# Kecerdasan Komputasional (KK)
+# Kecerdasan Komputasional
 
 > Logical Agents — Wumpus World, KB, entailment, propositional logic, model checking.
 

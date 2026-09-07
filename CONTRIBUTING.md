@@ -2,18 +2,18 @@
 
 ## Prinsip
 - **PDF-only:** Jangan commit `*.pptx/*.ppt/*.ppsx/*.docx`. Convert dulu via `./scripts/convert_ppt_to_pdf.sh` (LibreOffice headless). Original simpan di source backup, tidak di repo.
-- **Kebab-case:** `07. Adversarial Search.pptx` → `07-adversarial-search.pdf`. Tidak ada spasi, huruf kecil, no `PAA` kapital.
-- **Flat:** `courses/<slug>/` tanpa `semester/`. Slug: `alin, basisdata, bluecamp, dasprog, datmin, kalkulus-2, kk, kka, machine-learning, matdis, paa, probstat, strukdat, tegrf` (15).
-- **ML/DM first-class:** `external/Modul-ML-RKA` → `courses/machine-learning/materi/`, `external/Modul-DM-RKA` → `courses/datmin/modul/` (sync via `scripts/sync-external.sh`).
+- **Kebab-case & nama lengkap:** `aljabar-linear` bukan `alin`, `basis-data` bukan `basisdata`, `kecerdasan-komputasional` bukan `kk`, `konsep-kecerdasan-artifisial` bukan `kka`, `matematika-diskrit` bukan `matdis`, `struktur-data` bukan `strukdat`, `teori-graf` bukan `tegrf`, `perancangan-dan-analisis-algoritma` bukan `paa`, `probabilitas-dan-statistika` bukan `probstat`, `dasar-pemrograman` bukan `dasprog`, `data-mining` bukan `datmin`. Contoh: `07. Adversarial Search.pptx` → `07-adversarial-search.pdf` (lower, kebab).
+- **Flat:** `courses/<slug>/` tanpa `semester/`. Slug: `aljabar-linear, basis-data, bluecamp, dasar-pemrograman, data-mining, kalkulus-2, kecerdasan-komputasional, konsep-kecerdasan-artifisial, machine-learning, matematika-diskrit, perancangan-dan-analisis-algoritma, probabilitas-dan-statistika, struktur-data, teori-graf` (14).
+- **ML/DM first-class:** `external/Modul-ML-RKA` → `courses/machine-learning/materi/`, `external/Modul-DM-RKA` → `courses/data-mining/modul/` (sync via `scripts/sync-external.sh`).
 - **No junk:** Jangan commit `.venv/`, `venv-ppt/`, `__pycache__/`, `.godot/`, `__MACOSX/`, `*.lck`, `*.pyc`, `instance/stroke.db`.
 - **LFS:** `*.pdf, *.zip, *.mp4, *.m4a` otomatis LFS (`.gitattributes`).
 
-## Menambah Matkul
+## Menambah Mata Kuliah
 ```bash
-mkdir -p courses/<slug>/{materi,slides/pdf,praktikum}
+mkdir -p courses/<slug-baru>/{materi,slides/pdf,praktikum}
 # copy & convert
 ./scripts/convert_ppt_to_pdf.sh
-# tulis courses/<slug>/README.md pakai template docs/_template/README.md
+# tulis courses/<slug-baru>/README.md pakai template docs/_template/README.md
 ```
 
 ## Update External
@@ -26,7 +26,7 @@ mkdir -p courses/<slug>/{materi,slides/pdf,praktikum}
 ```
 feat(course): add kka EAS 2024 pdf
 fix(slides): re-convert probstat legacy ppt
-docs: update courses/tegra README
+docs: update courses/teori-graf README
 ```
 
 ## Validasi Sebelum Push

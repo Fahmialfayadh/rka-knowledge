@@ -1,4 +1,4 @@
-# Teori Graf (Tegraf)
+# Teori Graf
 
 > Tree, spanning, narasi politik X — Capres 2024.
 

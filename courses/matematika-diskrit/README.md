@@ -1,4 +1,4 @@
-# Matematika Diskrit (Matdis)
+# Matematika Diskrit
 
 > Final project risiko stroke — Flask + ML.
 

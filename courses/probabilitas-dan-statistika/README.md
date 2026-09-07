@@ -1,4 +1,4 @@
-# Probabilitas & Statistika (Probstat)
+# Probabilitas dan Statistika
 
 > Uji hipotesis, ANOVA, tabel distribusi.
 
