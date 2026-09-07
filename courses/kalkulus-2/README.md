@@ -2,15 +2,23 @@
 
 > Materi kalkulus 2: luas/volume, parametrik, koordinat kutub, barisan & deret.
 
-## Modul (11 + images)
-- `modul/01_luas_antara_dua_kurva.md` …
-- `modul/11_deret_tak_hingga.md`
-- `modul/kumpulan_rumus_eas.md` + `latihan_soal_eas.md`
-- `modul/images/` (20 png)
-- `polar.md`, `volue.md`, `generate_assets.py`
+## Struktur
+
+```
+materi/        # 2 modul utama
+├── polar.md   # 20K — Koordinat Polar (9.6-9.8) + cheat sheet
+└── volue.md   # 13K — Volume polar & tata cara gambar grafik
+
+modul/         # 11 modul + EAS
+├── 01_luas_antara_dua_kurva.md … 11_deret_tak_hingga.md
+├── kumpulan_rumus_eas.md + latihan_soal_eas.md
+└── images/    # 20 png
+
+generate_assets.py  # generator gambar (scratch)
+```
 
 ## Slides
-- Belum ada slide PPT — murni markdown + images (tidak perlu convert).
+- Tidak ada slide PPT — murni markdown + images (tidak perlu convert).
 
 ## Cara
-Buka modul berurutan; gambar di `modul/images/`.
+Buka `materi/polar.md` → `materi/volue.md` → `modul/01 … 11` berurutan; gambar di `modul/images/`.

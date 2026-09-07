@@ -3,16 +3,17 @@
 ## Prinsip
 - **PDF-only:** Jangan commit `*.pptx/*.ppt/*.ppsx/*.docx`. Convert dulu via `./scripts/convert_ppt_to_pdf.sh` (LibreOffice headless). Original simpan di source backup, tidak di repo.
 - **Kebab-case:** `07. Adversarial Search.pptx` → `07-adversarial-search.pdf`. Tidak ada spasi, huruf kecil, no `PAA` kapital.
-- **Flat:** `courses/<slug>/` tanpa `semester/`. Slug: `alin, basisdata, bluecamp, dasprog, datmin, kalkulus-2, kk, kka, matdis, paa, probstat, strukdat, tegrf`.
+- **Flat:** `courses/<slug>/` tanpa `semester/`. Slug: `alin, basisdata, bluecamp, dasprog, datmin, kalkulus-2, kk, kka, machine-learning, matdis, paa, probstat, strukdat, tegrf` (15).
+- **ML/DM first-class:** `external/Modul-ML-RKA` → `courses/machine-learning/materi/`, `external/Modul-DM-RKA` → `courses/datmin/modul/` (sync via `scripts/sync-external.sh`).
 - **No junk:** Jangan commit `.venv/`, `venv-ppt/`, `__pycache__/`, `.godot/`, `__MACOSX/`, `*.lck`, `*.pyc`, `instance/stroke.db`.
 - **LFS:** `*.pdf, *.zip, *.mp4, *.m4a` otomatis LFS (`.gitattributes`).
 
 ## Menambah Matkul
 ```bash
-mkdir -p courses/<slug>/{materi,slides/pdf,praktikum,assets}
+mkdir -p courses/<slug>/{materi,slides/pdf,praktikum}
 # copy & convert
 ./scripts/convert_ppt_to_pdf.sh
-# tulis courses/<slug>/README.md pakai template courses/_template/README.md
+# tulis courses/<slug>/README.md pakai template docs/_template/README.md
 ```
 
 ## Update External

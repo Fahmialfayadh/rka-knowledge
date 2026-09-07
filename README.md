@@ -2,13 +2,12 @@
 
 > Kurasi materi Rekayasa Kecerdasan Artifisial (RKA), Departemen Teknik Informatika ITS — terstruktur, PDF-only, enak dibaca, siap dikembangkan.
 
-[![Courses](https://img.shields.io/badge/courses-14-blue)](#daftar-matkul)
-[![External](https://img.shields.io/badge/external-2-green)](#modul-eksternal-vendor-copy)
+[![Courses](https://img.shields.io/badge/courses-15-blue)](#daftar-matkul)
 [![PDF-only](https://img.shields.io/badge/slides-PDF--only-orange)](#kebijakan-pdf-only)
 [![LFS](https://img.shields.io/badge/git--lfs-enabled-lightgrey)](#git-lfs)
 [![Private](https://img.shields.io/badge/access-private--limited-red)](#akses)
 
-Repo ini mengumpulkan **14 matkul + assets** dari `/home/data/kuliah/rka` plus **2 modul KCV** sebagai vendor copy. Semua slide PPT/PPSX/PPTX/DOCX sudah di-convert ke **PDF** (`courses/*/slides/pdf/`) — tidak menyimpan original PPT (backup tetap di source).
+Repo ini mengumpulkan **15 matkul + assets** dari `/home/data/kuliah/rka` plus **2 modul KCV sebagai matkul first-class** (bukan sekadar `external/`). Semua slide PPT/PPSX/PPTX/DOCX sudah di-convert ke **PDF** (`courses/*/slides/pdf/`) — tidak menyimpan original PPT (backup tetap di source).
 
 ## Struktur
 
@@ -16,67 +15,87 @@ Repo ini mengumpulkan **14 matkul + assets** dari `/home/data/kuliah/rka` plus *
 rka-knowledge/
 ├── README.md
 ├── CONTRIBUTING.md
-├── docs/panduan-konversi.md
-├── external/{Modul-ML-RKA,Modul-DM-RKA,ATTRIBUTION.md}
+├── docs/{panduan-konversi.md,_template/}
+├── external/{Modul-ML-RKA,Modul-DM-RKA,ATTRIBUTION.md}  # vendor raw (preserve upstream)
 ├── scripts/{convert_ppt_to_pdf.sh,sync-external.sh,inventory.py}
-└── courses/
-    ├── alin/            # Aljabar Linear — notebooks
-    ├── basisdata/       # Basis Data — studenttracker (Django)
-    ├── bluecamp/        # Bluecamp Day 2 — studi literatur sitasi
-    ├── dasprog/         # Dasar Pemrograman — 5 tugas
-    ├── datmin/          # Data Mining — rangkuman Week 1
-    ├── kalkulus-2/      # Kalkulus 2 — 11 modul + images
-    ├── kk/              # Kecerdasan Komputasional — Logical Agents (Wumpus)
-    ├── kka/             # KKA — search, adversarial, CSP, fuzzy, WAR project
-    ├── matdis/          # Matematika Diskrit — risiko stroke (Flask)
-    ├── paa/             # PAA — portofolio (docx→pdf)
-    ├── probstat/        # Probstat — uji hipotesis + tabel Z/T/F
-    ├── strukdat/        # Struktur Data — BST/BFS/DFS, queue/stack, media
-    ├── tegrf/           # Teori Graf — HeFDN, M5 Tree, narasi politik X, data capres2024
-    └── _template/
+└── courses/                     # 15 first-class, flat (ga per semester)
+    ├── alin/                    # Aljabar Linear
+    ├── basisdata/               # Basis Data
+    ├── bluecamp/                # Bluecamp Day 2
+    ├── dasprog/                 # Dasar Pemrograman
+    ├── data-mining/  -> datmin/ # Data Mining (lokal + Modul-DM-RKA)
+    ├── datmin/                  # alias ke data-mining (keep slang, isi penuh)
+    ├── kalkulus-2/              # Kalkulus 2
+    ├── kk/                      # Kecerdasan Komputasional
+    ├── kka/                     # KKA
+    ├── machine-learning/        # Machine Learning (dari Modul-ML-RKA)
+    ├── matdis/                  # Matematika Diskrit
+    ├── paa/                     # PAA
+    ├── probstat/                # Probstat
+    ├── strukdat/                # Struktur Data
+    └── tegrf/                   # Teori Graf
 ```
 
+> **Desain:** `external/` menyimpan snapshot mentah upstream (untuk attribution & sync). `courses/datmin` & `courses/machine-learning` adalah **kurasi first-class** yang berisi copy terstruktur dari `external/` — jadi ML/DM diperlakukan **sama** seperti matkul lain, tidak terpisah.
+
 Tiap `courses/<slug>/` baku:
+
 ```
 courses/<slug>/
 ├── README.md
-├── slides/pdf/          # PDF hasil konvert (kebab-case)
-├── materi/              # modul, paper, rangkuman
+├── slides/pdf/          # PDF hasil konvert (kebab-case) — hanya jika ada slide
+├── materi/              # modul lokal (pdf/md)
+├── modul/               # khusus kalkulus/datmin/machine-learning (dari external)
 ├── praktikum/ | tugas/ | projects/
-└── assets/
+└── assets/              # hanya jika ada media (tidak ada empty folder)
 ```
 
-## Daftar Matkul
+> Empty folder sudah di-prune — repo tidak menyimpan `assets/` kosong.
+
+## Daftar Matkul (15)
 
 | # | Slug | Nama | Ringkasan | Slides PDF |
 |---|---|---|---|---|
-| 1 | `alin` | Aljabar Linear | `women-s-shoes-prices-analysis.ipynb` (15M) | — |
+| 1 | `alin` | Aljabar Linear | `notebooks/women-s-shoes-prices-analysis.ipynb` (15M) | — |
 | 2 | `basisdata` | Basis Data | `projects/studenttracker` (Django `manage.py`, `tracker/models.py`) | — |
 | 3 | `bluecamp` | Bluecamp | `materi/studiliteratur.md` — APA vs Harvard, Ibid/Op.cit, Mendeley | — |
 | 4 | `dasprog` | Dasar Pemrograman | `tugas/{tugas_backtracking,floodnfill,search,sorting,textfile}` (32 py, 12 png bukti) | — |
-| 5 | `datmin` | Data Mining | `materi/Rangkuman Data Mining Week 1.pdf` | ✓ |
-| 6 | `kalkulus-2` | Kalkulus 2 | `modul/01-11` + `images/` + `polar.md/volue.md` | — |
-| 7 | `kk` | Kecerdasan Komputasional | `praktikum/Modul-Praktikum-KK-RKA-25` (Wumpus, 4 ipynb, `2026_2_Logical Agents_a.pdf`) | [`kk/slides/pdf/2026-1-pengantar-kk-s1-rka.pdf`](courses/kk/slides/pdf/2026-1-pengantar-kk-s1-rka.pdf) |
-| 8 | `kka` | KKA | `praktikum/uninformed-informed-search`, `local-adversarial-csp`, `materi/asset-ppt` (CS P, Fuzzy, EAS), `projects/WAR` (Godot+Python, `WARID_KEL-10.zip`) | [`kka/slides/pdf/`](courses/kka/slides/pdf/) (5 pdf) |
-| 9 | `matdis` | Matematika Diskrit | `projects/risiko-stroke` (Flask `app.py`, `templates/`, `pdf_generator.py`) | — |
-| 10 | `paa` | PAA | Portofolio 22M `docx→pdf` | [`paa/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf`](courses/paa/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf) |
-| 11 | `probstat` | Probabilitas & Statistika | `slides/pdf/{uji-parameter-1-populasi,uji-hipotesis-2-populasi,one-way-anova}`, `tabel/{F0-05,T,Z}` | ✓ 3 pdf |
-| 12 | `strukdat` | Struktur Data | `tugas/{sandbox,tugas1-4}`, `assets/audio1053355768.m4a` 33M, `tugas2/media` (95M) | — |
-| 13 | `tegrf` | Teori Graf | `materi/{FP_Tegraf.py,HeFDN_Analysis.pdf,viewer.html}`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`tegrf/slides/pdf/`](courses/tegrf/slides/pdf/) (7 pdf) |
-| 14 | `bluecamp` | — | sudah di atas | — |
+| 5 | `datmin` | **Data Mining** | `materi/Rangkuman Week1.pdf` + `modul/0-7` (EDA→Anomaly, 15 files dari `external/Modul-DM-RKA`) | ✓ pdf lokal |
+| 6 | `machine-learning` | **Machine Learning** | `materi/Supervised(11), Unsupervised(4), Deep Learning(2), RL, Deployment` — 24 files dari `external/Modul-ML-RKA` | — |
+| 7 | `kalkulus-2` | Kalkulus 2 | `materi/{polar.md,volue.md}` + `modul/01-11` + `images/` (20 png) | — |
+| 8 | `kk` | Kecerdasan Komputasional | `praktikum/Modul-Praktikum-KK-RKA-25` (Wumpus, 4 ipynb, `2026_2_Logical Agents_a.pdf`) | [`kk/slides/pdf/2026-1-pengantar-kk-s1-rka.pdf`](courses/kk/slides/pdf/2026-1-pengantar-kk-s1-rka.pdf) |
+| 9 | `kka` | KKA | `praktikum/uninformed-informed-search`, `local-adversarial-csp`, `materi/asset-ppt` (CSP, Fuzzy, EAS), `projects/WAR` (Godot+Python, `WARID_KEL-10.zip`) | [`kka/slides/pdf/`](courses/kka/slides/pdf/) (5 pdf) |
+| 10 | `matdis` | Matematika Diskrit | `projects/risiko-stroke` (Flask `app.py`, `templates/`, `pdf_generator.py`) | — |
+| 11 | `paa` | PAA | Portofolio `docx→pdf` | [`paa/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf`](courses/paa/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf) |
+| 12 | `probstat` | Probabilitas & Statistika | `slides/pdf/{uji-parameter-1-populasi,uji-hipotesis-2-populasi,one-way-anova}`, `tabel/{F0-05,T,Z}` | ✓ 3 pdf |
+| 13 | `strukdat` | Struktur Data | `tugas/{sandbox,tugas1-4}`, `assets/audio1053355768.m4a` 33M, `tugas2/media` (95M) | — |
+| 14 | `tegrf` | Teori Graf | `materi/{FP_Tegraf.py,HeFDN_Analysis.pdf,viewer.html}`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`tegrf/slides/pdf/`](courses/tegrf/slides/pdf/) (7 pdf) |
+| 15 | *(external)* | Vendor Raw | `external/Modul-ML-RKA` + `external/Modul-DM-RKA` — preserve upstream, sync via `scripts/sync-external.sh`; lihat `external/ATTRIBUTION.md` | — |
 
 Detail per-course: buka `courses/<slug>/README.md`.
 
-## Modul Eksternal (Vendor Copy)
+## Alur Folder — Kenapa Begini?
 
-Bukan submodule — snapshot self-contained di `external/`:
+- **Flat `courses/` (ga per semester)** sesuai request — enak discan, tidak perlu tebak semester. Urutan di tabel adalah navigasi utama.
+- **ML & DM jadi first-class** (`courses/machine-learning`, `courses/datmin/modul`) — tidak lagi “external doang”. `external/` tetap ada sebagai **arsip vendor mentah** (untuk audit & `sync-external.sh`), tapi yang dibaca sehari-hari adalah `courses/`.
+- **Tidak ada empty folder** — `assets/`, `slides/`, `materi/` kosong sudah dihapus (git tidak track empty dir; mengurangi noise).
+- **Kalkulus-2 dirapikan:** `polar.md`/`volue.md` → `materi/`, `modul/` tetap 11 md + `images/`, `slides/` dihapus (tidak ada slide), `assets/` dihapus.
+- **`_template` pindah** dari `courses/_template` → `docs/_template` (tidak mengotori listing matkul).
 
-| Modul | Source | Commit | Isi |
-|---|---|---|---|
-| **Modul-ML-RKA** | [kcv-if/Modul-ML-RKA](https://github.com/kcv-if/Modul-ML-RKA) | `46e0089` main | Supervised (Linear/Poly/Ridge-Lasso/Logistic/KNN/SVM/SVR/DecisionTree/ANN/NaiveBayes), Unsupervised (KMeans/Hierarchical/DBSCAN/BIRCH), DL (ANN/CNN), RL, Deployment |
-| **Modul-DM-RKA** | [kcv-if/Modul-DM-RKA](https://github.com/kcv-if/Modul-DM-RKA) | `cfa1d6c` master | Data Mining: EDA, Preprocessing, Ensemble & Class Imbalance, Association, Sequential, Clustering, Anomaly |
+## Modul KCV — Treat Sama
 
-Lihat `external/ATTRIBUTION.md`. Sync: `./scripts/sync-external.sh`.
+Dua modul KCV sekarang **simetris**:
+
+```
+external/Modul-ML-RKA  ──copy──►  courses/machine-learning/materi/
+external/Modul-DM-RKA  ──copy──►  courses/datmin/modul/
+local datmin Assets/  ────────►  courses/datmin/materi/Rangkuman...pdf
+```
+
+- `courses/datmin` = `materi/` (lokal) + `modul/` (7 topik KCV)
+- `courses/machine-learning` = `materi/` (5 topik KCV: Supervised/Unsupervised/DL/RL/Deployment)
+
+Update upstream: `./scripts/sync-external.sh` otomatis update `external/` + `courses/*/materi|modul/`. Commit hash tercatat di `external/ATTRIBUTION.md`.
 
 ## Kebijakan PDF-only
 
@@ -112,10 +131,10 @@ tegrf/slides/pdf/vision-board-1-0-final.pdf (4.0M)
 ```bash
 git clone <url> rka-knowledge
 cd rka-knowledge
-# tidak perlu --recurse-submodules (vendor copy)
+# tidak perlu --recurse-submodules (vendor copy, tapi sudah di courses/)
 # optional: re-run konversi
 ./scripts/convert_ppt_to_pdf.sh
-# sync external snapshot
+# sync external + courses
 ./scripts/sync-external.sh
 ```
 
@@ -133,7 +152,7 @@ File >50M wajib LFS: `WARID_KEL-10.zip` (54M), `strukdat/tugas2/media` (95M), `p
 
 ## Kontribusi
 
-Lihat [`CONTRIBUTING.md`](CONTRIBUTING.md). Penamaan file kebab-case, tidak ada `PAA` kapital, tidak commit `.venv/.godot/__pycache__`.
+Lihat [`CONTRIBUTING.md`](CONTRIBUTING.md). Penamaan file kebab-case, tidak commit `.venv/.godot/__pycache__`.
 
 ## Lisensi
 
@@ -141,4 +160,4 @@ Konten kurasi internal untuk kuliah RKA. Modul external mengikuti lisensi upstre
 
 ---
 
-*Generated 2026-09-07 — source `/home/data/kuliah/rka` (304M, 14 matkul).*
+*Generated 2026-09-07 — source `/home/data/kuliah/rka` (304M → curated 15 courses).*
