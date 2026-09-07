@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bl3g7xsppl2am"]
+
+[ext_resource type="Script" uid="uid://cyieboqhoscxl" path="res://Scripts/World.gd" id="1_jjgbg"]
+
+[node name="World" type="Node2D" unique_id=1701275944]
+script = ExtResource("1_jjgbg")
+
+[node name="Units" type="Node2D" parent="." unique_id=932477575]
+
+[node name="Buildings" type="Node2D" parent="." unique_id=711785691]
+
+[node name="Resources" type="Node2D" parent="." unique_id=1543479393]

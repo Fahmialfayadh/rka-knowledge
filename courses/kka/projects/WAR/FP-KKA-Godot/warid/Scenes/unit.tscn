@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cl4347f7e7o17"]
+
+[ext_resource type="Script" uid="uid://crksuycxihhim" path="res://Scripts/Unit.gd" id="1_c86kq"]
+[ext_resource type="Texture2D" uid="uid://0awi628drkq0" path="res://Asset/Sprites/redpeople.png" id="2_8omp6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpvrq"]
+radius = 485.1742
+
+[node name="Unit" type="CharacterBody2D" unique_id=1680342681]
+scale = Vector2(0.02, 0.02)
+script = ExtResource("1_c86kq")
+metadata/_custom_type_script = "uid://crksuycxihhim"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=135272484]
+texture = ExtResource("2_8omp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1570176787]
+position = Vector2(8, -58)
+shape = SubResource("CircleShape2D_lpvrq")

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 4mm;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 6.3pt;
+            line-height: 1.25;
+            color: #111;
+            background: #fff;
+        }
+
+        .page {
+            width: 202mm;
+            height: 289mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 1.5mm;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .page-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(90deg, #0d1b2a 0%, #1b4332 50%, #0d1b2a 100%);
+            color: #f0e68c;
+            text-align: center;
+            padding: 1.5mm 2mm;
+            font-size: 7.5pt;
+            font-weight: bold;
+            letter-spacing: 0.8pt;
+            text-transform: uppercase;
+            border-bottom: 1pt solid #ffd700;
+        }
+
+        .page-footer {
+            grid-column: 1 / -1;
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            font-size: 5pt;
+            padding: 1mm;
+            letter-spacing: 0.3pt;
+            border-top: 1pt solid #444;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            gap: 1mm;
+            overflow: hidden;
+        }
+
+        .box {
+            border: 0.5pt solid #888;
+            border-radius: 1mm;
+            overflow: hidden;
+            box-shadow: 0 0.5mm 1mm rgba(0, 0, 0, 0.05);
+        }
+
+        .bh {
+            padding: 1mm 1.5mm;
+            font-weight: bold;
+            font-size: 6.8pt;
+            letter-spacing: 0.2pt;
+            color: white;
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .bh.red {
+            background: linear-gradient(135deg, #8b0000 0%, #a50000 100%);
+            border-bottom: 0.8pt solid #ff9999;
+        }
+
+        .bh.blue {
+            background: linear-gradient(135deg, #003580 0%, #004ba0 100%);
+            border-bottom: 0.8pt solid #99ccff;
+        }
+
+        .bh.green {
+            background: linear-gradient(135deg, #1a5c1a 0%, #227a22 100%);
+            border-bottom: 0.8pt solid #99ff99;
+        }
+
+        .bh.purple {
+            background: linear-gradient(135deg, #4a0070 0%, #600090 100%);
+            border-bottom: 0.8pt solid #d999ff;
+        }
+
+        .bh.orange {
+            background: linear-gradient(135deg, #7a3200 0%, #a04000 100%);
+            border-bottom: 0.8pt solid #ffb380;
+        }
+
+        .bh.teal {
+            background: linear-gradient(135deg, #006060 0%, #008080 100%);
+            border-bottom: 0.8pt solid #80ffff;
+        }
+
+        .bh.gray {
+            background: linear-gradient(135deg, #444444 0%, #555555 100%);
+            border-bottom: 0.8pt solid #aaaaaa;
+        }
+
+        .bc {
+            padding: 0.8mm 1.2mm;
+            background: #fff;
+        }
+
+        .sub {
+            background: #f0f0f0;
+            color: #222;
+            font-weight: bold;
+            font-size: 6pt;
+            padding: 0.5mm 1.2mm;
+            border-left: 2pt solid #555;
+            border-top: 0.4pt solid #ddd;
+            border-bottom: 0.4pt solid #ddd;
+            margin: 0.5mm -1.2mm 0.5mm -1.2mm;
+        }
+
+        .formula {
+            background: linear-gradient(to right, #fffce0, #fffff0);
+            border-left: 2.5pt solid #d4af37;
+            padding: 0.6mm 1.2mm;
+            margin: 0.4mm 0;
+            font-size: 5.8pt;
+            line-height: 1.35;
+            border-radius: 0 0.5mm 0.5mm 0;
+            white-space: pre-wrap;
+            /* Will transition this section by section */
+        }
+
+        .warn {
+            background: #fff0f0;
+            border-left: 2.5pt solid #c00;
+            padding: 0.6mm 1.2mm;
+            margin: 0.4mm 0;
+            font-size: 6pt;
+            border-radius: 0 0.5mm 0.5mm 0;
+        }
+
+        .ok {
+            background: #f0fff0;
+            border-left: 2.5pt solid #080;
+            padding: 0.6mm 1.2mm;
+            margin: 0.4mm 0;
+            font-size: 6pt;
+            border-radius: 0 0.5mm 0.5mm 0;
+        }
+
+        .info {
+            background: #e8f4ff;
+            border-left: 2.5pt solid #0066cc;
+            padding: 0.6mm 1.2mm;
+            margin: 0.4mm 0;
+            border-radius: 0 0.5mm 0.5mm 0;
+        }
+
+        p {
+            margin: 0.25mm 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 3.8mm;
+            margin: 0.25mm 0;
+        }
+
+        li {
+            margin: 0.2mm 0;
+            padding-left: 0.5mm;
+        }
+
+        li::marker {
+            color: #555;
+            font-weight: bold;
+        }
+
+        b {
+            color: #000;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 5.8pt;
+            margin: 0.5mm 0;
+            border: 0.5pt solid #aaa;
+            border-radius: 0.5mm;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(to bottom, #e0e0e0, #cccccc);
+            padding: 0.5mm 0.8mm;
+            font-size: 5.8pt;
+            text-align: left;
+            border-bottom: 0.5pt solid #888;
+            font-weight: bold;
+            color: #222;
+        }
+
+        td {
+            padding: 0.4mm 0.8mm;
+            border-bottom: 0.3pt solid #ccc;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 5.5pt;
+            background: #f4f4f4;
+            border: 0.3pt solid #e0e0e0;
+            border-radius: 0.5mm;
+            padding: 0 0.6mm;
+            color: #c7254e;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #333;
+            color: white;
+            font-size: 5pt;
+            padding: 0.2mm 1mm;
+            border-radius: 1mm;
+            margin-right: 0.4mm;
+            text-transform: uppercase;
+            letter-spacing: 0.2pt;
+        }
+
+        .divider {
+            height: 0.5pt;
+            background: linear-gradient(to right, transparent, #bbb, transparent);
+            margin: 0.8mm 0;
+        }
+
+        /* Math Notation Styles */
+        .math {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-style: italic;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .formula.math {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .math b {
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 0.5mm;
+            line-height: 1;
+        }
+
+        .frac>.num {
+            border-bottom: 0.5pt solid #222;
+            padding: 0 0.5mm;
+            font-size: 5pt;
+        }
+
+        .frac>.den {
+            padding: 0 0.5mm;
+            font-size: 5pt;
+        }
+
+        .fn {
+            font-style: normal;
+        }
+
+        .op {
+            font-style: normal;
+            margin: 0 0.5mm;
+        }
+
+        .diagram-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.2mm;
+            margin: 0.8mm 0;
+        }
+
+        .diagram-container {
+            width: 49%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 0.4pt solid #bbb;
+            border-radius: 0.4mm;
+            background: #fbfbfb;
+            padding: 0.4mm;
+        }
+
+        .diagram-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════════ PAGE 1 ══════════════ -->
+    <div class="page">
+        <div class="page-header">⚔ EAS KKA — KI141315 KONSEP KECERDASAN ARTIFISIAL — ITS 2025/2026 — CHEATSHEET HALAMAN
+            1/2 ⚔</div>
+
+        <!-- COL 1: ADVERSARIAL SEARCH -->
+        <div class="col">
+            <div class="box">
+                <div class="bh red">⚔ ADVERSARIAL SEARCH</div>
+                <div class="bc">
+                    <p><b>Game elemen:</b> state, action, terminal test, utility function</p>
+                    <p><b>MAX</b> = kamu (inginkan nilai tertinggi) | <b>MIN</b> = lawan (inginkan nilai terendah)</p>
+                    <p><b>Zero-sum:</b> keuntungan MAX = kerugian MIN</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh red">🎯 MINIMAX</div>
+                <div class="bc">
+                    <div class="formula math">
+                        <span class="fn">MINIMAX</span>(n) =<br>
+                        &nbsp;&nbsp;<span class="fn">Utility</span>(n) <span class="fn">if TERMINAL</span>(n)<br>
+                        &nbsp;&nbsp;<span class="fn">max</span> { <span class="fn">MINIMAX</span>(s) : s ∈ <span
+                            class="fn">SUCC</span>(n) } <span class="fn">if MAX node</span> (△)<br>
+                        &nbsp;&nbsp;<span class="fn">min</span> { <span class="fn">MINIMAX</span>(s) : s ∈ <span
+                            class="fn">SUCC</span>(n) } <span class="fn">if MIN node</span> (▽)
+                    </div>
+                    <p><b>Cara:</b> DFS sampai leaf → propagasi nilai ke atas</p>
+                    <div class="warn"><b>MAX node:</b> ambil nilai TERBESAR dari anak<br><b>MIN node:</b> ambil nilai
+                        TERKECIL dari anak</div>
+                    <p><b>Kompleksitas:</b> Time O(b<sup>d</sup>) | Space O(b·d)</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh red">✂ ALPHA-BETA PRUNING</div>
+                <div class="bc">
+                    <div class="formula math">
+                        α = lower bound MAX <span class="fn">(best MAX found so far) → init</span> -∞<br>
+                        β = upper bound MIN <span class="fn">(best MIN found so far) → init</span> +∞
+                    </div>
+                    <div class="warn"><b>ATURAN PRUNING:</b><br>
+                        MAX node n: STOP expand jika <span class="math">α(n) ≥ β</span> (dari ancestor)<br>
+                        MIN node n: STOP expand jika <span class="math">β(n) ≤ α</span> (dari ancestor)</div>
+                    <div class="sub">Update α dan β:</div>
+                    <div class="formula math">
+                        <span class="fn">Di MAX node:</span> α ← <span class="fn">max</span>(α, nilai anak)<br>
+                        <span class="fn">Di MIN node:</span> β ← <span class="fn">min</span>(β, nilai anak)<br>
+                        <span class="fn">Turunkan</span> (α,β) <span class="fn">saat masuk ke child node</span>
+                    </div>
+                    <div class="sub">Algoritma tracing step-by-step:</div>
+                    <ol>
+                        <li>Start root: <span class="math">α=-∞, β=+∞</span></li>
+                        <li>Expand DFS kiri ke kanan</li>
+                        <li>Di leaf: return nilai ke parent</li>
+                        <li>MAX node: terima nilai anak, update α. Cek <span class="math">α≥β</span> → prune saudara
+                            kanan</li>
+                        <li>MIN node: terima nilai anak, update β. Cek <span class="math">β≤α</span> → prune saudara
+                            kanan</li>
+                        <li>Pass (α,β) yang terupdate ke child berikutnya</li>
+                    </ol>
+                    <div class="ok"><b>Node X = dipruning</b> → tidak perlu dihitung<br>Nilai root = nilai minimax
+                        optimal (sama dengan tanpa pruning)</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">📖 CONTOH TRACING α-β & GAME TREE</div>
+                <div class="bc">
+                    <svg viewBox="0 0 200 110" width="100%"
+                        style="border: 0.5pt solid #ddd; background: #fafafa; border-radius: 0.5mm; margin-bottom: 1mm;">
+                        <!-- Edges -->
+                        <line x1="100" y1="15" x2="50" y2="50" stroke="#555" stroke-width="1" />
+                        <line x1="100" y1="15" x2="150" y2="50" stroke="#555" stroke-width="1" />
+                        <line x1="50" y1="50" x2="25" y2="90" stroke="#555" stroke-width="1" />
+                        <line x1="50" y1="50" x2="75" y2="90" stroke="#555" stroke-width="1" />
+                        <line x1="150" y1="50" x2="115" y2="90" stroke="#555" stroke-width="1" />
+                        <line x1="150" y1="50" x2="175" y2="90" stroke="#555" stroke-width="1" />
+                        <!-- Pruned branch indicator -->
+                        <line x1="175" y1="90" x2="195" y2="90" stroke="#d00" stroke-width="1" stroke-dasharray="2,2" />
+                        <!-- Cut mark -->
+                        <text x="182" y="88" font-size="10" fill="#d00" font-weight="bold">✂</text>
+
+                        <!-- Level Labels -->
+                        <text x="5" y="18" font-size="6" fill="#666" font-style="italic">MAX</text>
+                        <text x="5" y="53" font-size="6" fill="#666" font-style="italic">MIN</text>
+                        <text x="5" y="93" font-size="6" fill="#666" font-style="italic">MAX/Leaf</text>
+
+                        <!-- Nodes -->
+                        <!-- A (Root, MAX) -->
+                        <polygon points="100,8 110,22 90,22" fill="#4a90e2" stroke="#2a60a2" stroke-width="0.5" />
+                        <text x="97" y="19" font-size="7" fill="white" font-weight="bold">6</text>
+                        <text x="113" y="17" font-size="5" fill="#333">A (α=4,β=∞)</text>
+
+                        <!-- B (MIN) -->
+                        <polygon points="40,45 60,45 50,59" fill="#e24a4a" stroke="#a22a2a" stroke-width="0.5" />
+                        <text x="47" y="54" font-size="7" fill="white" font-weight="bold">4</text>
+                        <text x="20" y="43" font-size="5" fill="#333">B (α=-∞,β=4)</text>
+
+                        <!-- C (MIN) -->
+                        <polygon points="140,45 160,45 150,59" fill="#e24a4a" stroke="#a22a2a" stroke-width="0.5" />
+                        <text x="147" y="54" font-size="7" fill="white" font-weight="bold">6</text>
+                        <text x="162" y="43" font-size="5" fill="#333">C (α=4,β=6)</text>
+
+                        <!-- E (Leaf) -->
+                        <rect x="18" y="90" width="14" height="14" rx="2" fill="#e8e8e8" stroke="#888" />
+                        <text x="23" y="100" font-size="7" fill="#333">4</text>
+
+                        <!-- F (Leaf) -->
+                        <rect x="68" y="90" width="14" height="14" rx="2" fill="#e8e8e8" stroke="#888" />
+                        <text x="73" y="100" font-size="7" fill="#333">5</text>
+
+                        <!-- G (Leaf) -->
+                        <rect x="108" y="90" width="14" height="14" rx="2" fill="#e8e8e8" stroke="#888" />
+                        <text x="113" y="100" font-size="7" fill="#333">6</text>
+
+                        <!-- H (MAX) -->
+                        <polygon points="175,85 185,99 165,99" fill="#4a90e2" stroke="#2a60a2" stroke-width="0.5" />
+                        <text x="172" y="96" font-size="7" fill="white" font-weight="bold">7</text>
+                        <text x="171" y="107" font-size="4" fill="#333">H(α=7,β=6)</text>
+
+                        <!-- Pruned O -->
+                        <circle cx="195" cy="97" r="6" fill="#ffdddd" stroke="#d00" stroke-width="0.5" />
+                        <text x="193" y="99" font-size="6" fill="#d00">9</text>
+                    </svg>
+
+                    <div class="formula math" style="font-size: 5pt;">
+                        <span class="fn"><b>Tracing:</b></span><br>
+                        1. <b>B</b> dapat E=4 → β=min(∞,4)=4. F=5 ≥ β=4 → <b>B=4</b>.<br>
+                        2. <b>A</b>(MAX) dapat B=4 → update α=max(-∞,4)=4.<br>
+                        3. <b>C</b>(MIN) bawa α=4. C dapat G=6 → β=min(∞,6)=6.<br>
+                        4. <b>H</b>(MAX) bawa α=4, β=6. H dapat nilai (L=3, M=4, N=7).<br>
+                        5. Saat N=7, <b>H</b> update α=7. Karena <span style="color:#d00;"><b>α(7) ≥ β(6)</b></span>,
+                        PRUNE child H selanjutnya (O=9)!<br>
+                        6. <b>C</b> dapat H=7, nilai C = min(6,7) = <b>6</b>.<br>
+                        7. <b>A</b>(MAX) dapat B=4, C=6 → Nilai akhir A = max(4,6) = <b>6</b>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COL 2: CSP -->
+        <div class="col">
+            <div class="box">
+                <div class="bh blue">🧩 CONSTRAINT SATISFACTION PROBLEM (CSP)</div>
+                <div class="bc">
+                    <div class="formula">CSP = (X, D, C)
+                        X = {X₁,...,Xₙ} — variabel yang mau diisi
+                        D = {D₁,...,Dₙ} — domain nilai tiap variabel
+                        C = {C₁,...,Cₘ} — batasan (constraints)</div>
+                    <p><b>Solusi:</b> complete assignment yang MEMENUHI SEMUA constraints</p>
+                    <p><b>Consistent:</b> assignment tidak melanggar constraint apapun</p>
+                    <div class="info" style="font-size: 5.3pt; padding: 0.3mm 0.8mm; margin-top: 0.5mm;"><b>Contoh: Map
+                            Australia</b><br>
+                        • <b>X:</b> {WA, NT, Q, NSW, V, SA, T}<br>
+                        • <b>D:</b> {red, green, blue}<br>
+                        • <b>C:</b> Tetangga berbeda warna (e.g., WA ≠ NT)<br>
+                        • <b>T (Tasmania):</b> Independent (tidak bertetangga)</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh blue">📊 JENIS CONSTRAINT & GRAPH</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th>Tipe</th>
+                            <th>Jumlah Var</th>
+                            <th>Contoh</th>
+                        </tr>
+                        <tr>
+                            <td>Unary</td>
+                            <td>1 var</td>
+                            <td>SA ≠ green</td>
+                        </tr>
+                        <tr>
+                            <td>Binary</td>
+                            <td>2 var</td>
+                            <td>SA ≠ WA</td>
+                        </tr>
+                        <tr>
+                            <td>Higher-order</td>
+                            <td>&gt;2 var</td>
+                            <td>Alldiff(F,T,U,W,R,O)</td>
+                        </tr>
+                        <tr>
+                            <td>Preference (soft)</td>
+                            <td>any</td>
+                            <td>red lebih baik dari green</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:0.5mm"><b>Constraint graph:</b> node = variabel, edge = binary constraint antar
+                        2 variabel</p>
+                    <p><b>Manfaat:</b> deteksi independent subproblem → selesaikan terpisah</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh blue">🔄 BACKTRACKING SEARCH</div>
+                <div class="bc">
+                    <div class="formula">BACKTRACK({}, csp):
+                        if assign complete → return assign
+                        var ← SELECT-UNASSIGNED-VARIABLE(csp, assign)
+                        for each val in ORDER-DOMAIN-VALUES(var, csp):
+                        if val KONSISTEN dengan assign:
+                        assign[var] = val
+                        result ← BACKTRACK(assign, csp)
+                        if result ≠ failure → return result
+                        remove {var=val} dari assign
+                        return failure</div>
+                    <p><b>Idea 1:</b> One variable at a time (commutative)</p>
+                    <p><b>Idea 2:</b> Check constraints as you go (incremental)</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh blue">📌 VARIABLE & VALUE ORDERING</div>
+                <div class="bc">
+                    <div class="sub">SELECT-UNASSIGNED-VARIABLE (pilih variabel):</div>
+                    <div class="info"><b>MRV (Minimum Remaining Values)</b> = Most Constrained<br>
+                        Pilih var dengan nilai legal PALING SEDIKIT tersisa<br>
+                        → "fail-first": deteksi kegagalan lebih awal</div>
+                    <div class="info"><b>MCV (Most Constraining Variable)</b> = tiebreaker MRV<br>
+                        Pilih var yang punya PALING BANYAK constraint ke var lain<br>
+                        → pilih SA karena punya 5 constraint di map coloring</div>
+                    <div class="sub">ORDER-DOMAIN-VALUES (pilih nilai):</div>
+                    <div class="info"><b>LCV (Least Constraining Value)</b><br>
+                        Pilih nilai yang menghapus PALING SEDIKIT pilihan dari neighbor<br>
+                        → pilih nilai yang biarkan neighbor punya pilihan terbanyak<br>
+                        → "fail-last": tetap buka opsi sebesar mungkin</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh blue">🔍 FORWARD CHECKING (FC)</div>
+                <div class="bc">
+                    <p>Setelah assign Xᵢ = v:</p>
+                    <ul>
+                        <li>Untuk setiap tetangga Xⱼ (unassigned): hapus nilai dari Dⱼ yang tidak konsisten dengan v
+                        </li>
+                        <li>Jika Dⱼ = ∅ → <b>LANGSUNG BACKTRACK!</b></li>
+                    </ul>
+                    <div class="formula">Contoh: X1=1 (4-Queens)
+                        After assign X1=1, hapus dari neighbor:
+                        X2: hapus 1(same row), 2(diag) → X2={3,4}
+                        X3: hapus 1,2,3 → X3={3,4} → wait: hapus row1, diag+1, diag-1
+                        X4: hapus 1,2,3,4... [sesuai constraint queen]</div>
+                    <div class="warn">FC hanya cek arc dari variabel yang baru di-assign<br>Tidak deteksi inkonsistensi
+                        antar unassigned variables</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh blue">🔗 ARC CONSISTENCY (AC-3)</div>
+                <div class="bc">
+                    <div class="formula">Arc Xᵢ→Xⱼ KONSISTEN jika:
+                        ∀x ∈ Dᵢ, ∃y ∈ Dⱼ: (x,y) memenuhi constraint Xᵢ↔Xⱼ
+
+                        Jika ada x ∈ Dᵢ yang tidak punya y valid → hapus x dari Dᵢ
+                        Jika Dᵢ berubah → masukkan semua (Xₖ, Xᵢ) ke queue</div>
+                    <table>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Forward Checking</th>
+                            <th>Arc Consistency</th>
+                        </tr>
+                        <tr>
+                            <td>Kecepatan</td>
+                            <td>✅ Lebih cepat</td>
+                            <td>❌ Lebih lambat</td>
+                        </tr>
+                        <tr>
+                            <td>Pruning</td>
+                            <td>❌ Kurang efektif</td>
+                            <td>✅ Lebih efektif</td>
+                        </tr>
+                        <tr>
+                            <td>Deteksi</td>
+                            <td>Arc var baru saja</td>
+                            <td>Semua arc</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:0.3mm"><b>k-consistency:</b> 1=node, 2=arc, 3=path | Strongly k: konsisten
+                        untuk semua 1..k</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">💡 TIPS SOAL CSP (Q1)</div>
+                <div class="bc">
+                    <ul>
+                        <li><b>Variabel:</b> apa yang mau diputuskan/diisi</li>
+                        <li><b>Domain:</b> nilai valid tiap variabel</li>
+                        <li><b>Constraint:</b> semua batasan antar variabel</li>
+                        <li><b>Graph:</b> node=var, edge=ada constraint binary</li>
+                        <li><b>FC:</b> tampilkan domain tersisa setelah tiap assign</li>
+                        <li><b>BT:</b> gambar tree, tandai X pada branch yg backtrack</li>
+                        <li><b>Soal Jadwal/SKS:</b> var=Kelas/MK, domain=Dosen/Waktu, constraint=Tidak boleh bentrok
+                            (contoh: <i>AllDiff</i>).</li>
+                        <li><b>Soal Crossword:</b> var=slot kotak (1-Mendatar, 2-Menurun), domain=daftar kata.
+                            <b>Constraint:</b> Irisan huruf pada titik silang harus sama (misal bersilang di kotak ke-3
+                            1M dan kotak ke-1 2M → <code>1M[3] == 2M[1]</code>). <b>FC:</b> coret kata dari domain yang
+                            tidak cocok huruf irisannya.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- COL 3: FOL -->
+        <div class="col">
+            <div class="box">
+                <div class="bh green">🔵 FIRST ORDER LOGIC (FOL) — SYNTAX</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th>Elemen</th>
+                            <th>Deskripsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                        <tr>
+                            <td>Constants</td>
+                            <td>Objek spesifik</td>
+                            <td>KingJohn, Ali, ProyekA</td>
+                        </tr>
+                        <tr>
+                            <td>Predicates</td>
+                            <td>Relasi/properti</td>
+                            <td>Karyawan(x), Brother(x,y)</td>
+                        </tr>
+                        <tr>
+                            <td>Functions</td>
+                            <td>Mapping obyek</td>
+                            <td>Father(x), f(y)</td>
+                        </tr>
+                        <tr>
+                            <td>Variables</td>
+                            <td>Placeholder</td>
+                            <td>x, y, z</td>
+                        </tr>
+                        <tr>
+                            <td>Connectives</td>
+                            <td>Logika</td>
+                            <td>¬ ∧ ∨ ⇒ ⟺</td>
+                        </tr>
+                        <tr>
+                            <td>Quantifiers</td>
+                            <td>Semua/ada</td>
+                            <td>∀x, ∃x</td>
+                        </tr>
+                    </table>
+                    <div class="formula">Atom: predicate(term₁,...,termₙ) atau term₁ = term₂
+                        Term: function(term₁,...,termₙ) atau constant atau variable</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh green">⚡ QUANTIFIER RULES</div>
+                <div class="bc">
+                    <div class="warn"><b>∀ (Universal) → konektivitas utama HARUS ⇒</b><br>
+                        ∀x Karyawan(x) ⇒ MendapatGaji(x)<br>
+                        [Semua karyawan mendapat gaji]<br><br>
+                        <b>∃ (Existential) → konektivitas utama HARUS ∧</b><br>
+                        ∃x Karyawan(x) ∧ MendapatBonus(x)<br>
+                        [Ada karyawan yang mendapat bonus]
+                    </div>
+                    <div class="formula">❌ SALAH: ∀x P(x) ∧ Q(x) → berarti semua x memenuhi P DAN semua x memenuhi Q
+                        ❌ SALAH: ∃x P(x) ⇒ Q(x) → benar meski tidak ada x yang penuhi P!
+
+                        Duality: ¬∀x P ≡ ∃x ¬P | ¬∃x P ≡ ∀x ¬P
+                        Commutativity: ∀x∀y ≡ ∀y∀x | ∃x∃y ≡ ∃y∃x
+                        NON-commutative: ∃x∀y P ≠ ∀y∃x P ← HATI-HATI!</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh green">🔄 KONVERSI FOL → CNF (7 LANGKAH)</div>
+                <div class="bc">
+                    <ol>
+                        <li><b>Eliminasi biconditional (⟺):</b><br><code>A⟺B → (A⇒B) ∧ (B⇒A)</code></li>
+                        <li><b>Eliminasi implikasi (⇒):</b><br><code>A⇒B → ¬A∨B</code></li>
+                        <li><b>Pindah ¬ ke dalam:</b><br>
+                            <code>¬(A∧B) → ¬A∨¬B</code> | <code>¬(A∨B) → ¬A∧¬B</code><br>
+                            <code>¬∀x P → ∃x ¬P</code> | <code>¬∃x P → ∀x ¬P</code> | <code>¬¬P → P</code>
+                        </li>
+                        <li><b>Standardize variabel:</b> tiap quantifier pakai nama unik</li>
+                        <li><b>Skolemize — eliminasi ∃:</b><br>
+                            ∃x bebas → ganti dengan konstanta baru (C₁, C₂,...)<br>
+                            ∃x di bawah ∀y₁...∀yₙ → ganti dengan fungsi f(y₁,...,yₙ)</li>
+                        <li><b>Drop ∀</b> — semua variabel masih universally quantified</li>
+                        <li><b>Distribusikan ∨ atas ∧:</b><br>
+                            <code>A∨(B∧C) → (A∨B) ∧ (A∨C)</code>
+                        </li>
+                    </ol>
+                    <div class="ok">Hasil CNF: konjungsi (∧) dari klause-klause, tiap klause adalah disjungsi (∨)
+                        literal</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh green">⚙ RESOLUTION</div>
+                <div class="bc">
+                    <div class="formula">PRINSIP:
+                        C₁ = {L, l₁, l₂,...} C₂ = {¬L, m₁, m₂,...}
+                        Resolvent = {l₁,l₂,...,m₁,m₂,...} (hapus L dan ¬L)</div>
+                    <div class="warn"><b>PROOF BY REFUTATION (SOAL Q2c):</b><br>
+                        1. Tulis semua KB dalam CNF<br>
+                        2. NEGATE goal → tambahkan ¬Goal ke KB dalam CNF<br>
+                        3. Resolve pasangan klause sampai → empty clause { }<br>
+                        4. Empty clause = KONTRADIKSI → Goal terbukti ✓</div>
+                    <div class="formula">UNIFICATION: UNIFY(p,q) = θ → SUBST(θ,p) = SUBST(θ,q)
+                        Contoh: UNIFY(Knows(x,Obama), Knows(Bill,y))
+                        = {x/Bill, y/Obama}</div>
+                    <div class="sub">Contoh Resolusi (Q2c style):</div>
+                    <div class="formula">KB: ¬Karyw(x)∨¬MgP(x,A)∨¬MsP(x,A)∨Bonus(x) [R1 CNF]
+                        ¬Bonus(x)∨¬MsP(x,C)∨Pujian(x) [R3 CNF]
+                        Karyw(Ali), MgP(Ali,A), MsP(Ali,A), MsP(Ali,C) [facts]
+                        Prove: Pujian(Ali) → negate: ¬Pujian(Ali)
+
+                        Resolve R1+facts → Bonus(Ali)
+                        Resolve R3+facts → ¬Bonus(Ali)∨Pujian(Ali)
+                        Resolve with Bonus(Ali) → Pujian(Ali)
+                        Resolve with ¬Pujian(Ali) → {} ← KONTRADIKSI → TERBUKTI! ✓</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh green">🔁 FORWARD vs BACKWARD CHAINING</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Forward Chaining</th>
+                            <th>Backward Chaining</th>
+                        </tr>
+                        <tr>
+                            <td>Arah</td>
+                            <td>Facts → Goal</td>
+                            <td>Goal → Facts</td>
+                        </tr>
+                        <tr>
+                            <td>Tipe</td>
+                            <td>Data-driven, bottom-up</td>
+                            <td>Goal-driven, top-down</td>
+                        </tr>
+                        <tr>
+                            <td>Cara</td>
+                            <td>Apply rules ke facts → derive baru sampai goal</td>
+                            <td>Breakdown goal → subgoal sampai match facts</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:0.3mm"><b>Horn clause:</b> P₁ ∧ P₂ ∧ ... ∧ Pₙ ⇒ Q (paling banyak 1 positif di
+                        head)</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">🔑 LOGICAL EQUIVALENCES</div>
+                <div class="bc">
+                    <div class="formula math" style="font-size: 5pt; padding: 0.3mm 0.8mm;">
+                        <b>De Morgan:</b> ¬(A∧B) = ¬A∨¬B <span class="op">|</span> ¬(A∨B) = ¬A∧¬B<br>
+                        <b>Implikasi:</b> A⇒B = ¬A∨B<br>
+                        <b>Biconditional:</b> A⟺B = (A⇒B)∧(B⇒A) = (¬A∨B)∧(¬B∨A)<br>
+                        <b>Kontraposisi:</b> A⇒B ≡ ¬B⇒¬A<br>
+                        <b>Distribusi:</b> A∨(B∧C) = (A∨B)∧(A∨C)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A∧(B∨C) =
+                        (A∧B)∨(A∧C)<br>
+                        <b>Double negation:</b> ¬¬A = A
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">KKA CHEATSHEET · ITS Teknik Informatika · Open Note 1 Lembar A4 · Halaman 1/2 |
+            Adversarial Search | CSP | First Order Logic (FOL)</div>
+    </div>
+
+    <!-- ══════════════ PAGE 2 ══════════════ -->
+    <div class="page">
+        <div class="page-header">✦ EAS KKA — KI141315 KONSEP KECERDASAN ARTIFISIAL — ITS 2024/2025 — CHEATSHEET HALAMAN
+            2/2 ✦</div>
+
+        <!-- COL 1: FUZZY BASICS & MF -->
+        <div class="col">
+            <div class="box">
+                <div class="bh purple">🌊 LOGIKA FUZZY — DASAR</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Crisp</th>
+                            <th>Fuzzy</th>
+                        </tr>
+                        <tr>
+                            <td>Nilai μ</td>
+                            <td>0 atau 1</td>
+                            <td>[0,1] kontinu</td>
+                        </tr>
+                        <tr>
+                            <td>Batas</td>
+                            <td>Tajam</td>
+                            <td>Gradual</td>
+                        </tr>
+                        <tr>
+                            <td>Karakter</td>
+                            <td>Pasti</td>
+                            <td>Ambigu</td>
+                        </tr>
+                    </table>
+                    <div class="warn">Fuzzy ≠ Probabilitas! Fuzzy = ambiguitas/ketidakjelasan, Probabilitas =
+                        ketidakpastian kejadian</div>
+                    <p><b>DOM</b> = Degree of Membership = μ(x) ∈ [0,1]</p>
+                    <p>Nilai fuzzy berasosiasi dengan derajat keanggotaan pada himpunan</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh purple">📐 FUNGSI KEANGGOTAAN</div>
+                <div class="bc">
+                    <!-- Row 1: Linear Naik & Turun -->
+                    <div class="diagram-row">
+                        <div class="diagram-container">
+                            <span style="font-size: 5pt; font-weight: bold; color: #4a0070;">Linear Naik [a, b]</span>
+                            <svg class="diagram-svg" viewBox="0 0 160 55">
+                                <line x1="15" y1="45" x2="150" y2="45" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="5" x2="20" y2="48" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="10" x2="120" y2="10" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="120" y1="10" x2="120" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <path d="M 15,45 L 40,45 L 120,10 L 150,10" stroke="#8a2be2" stroke-width="1.2"
+                                    fill="none" />
+                                <text x="8" y="13" font-size="7px" font-family="Arial" fill="#555">1</text>
+                                <text x="8" y="48" font-size="7px" font-family="Arial" fill="#555">0</text>
+                                <text x="38" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">a</text>
+                                <text x="118" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">b</text>
+                            </svg>
+                        </div>
+                        <div class="diagram-container">
+                            <span style="font-size: 5pt; font-weight: bold; color: #4a0070;">Linear Turun [a, b]</span>
+                            <svg class="diagram-svg" viewBox="0 0 160 55">
+                                <line x1="15" y1="45" x2="150" y2="45" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="5" x2="20" y2="48" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="10" x2="40" y2="10" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="40" y1="10" x2="40" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <path d="M 15,10 L 40,10 L 120,45 L 150,45" stroke="#8a2be2" stroke-width="1.2"
+                                    fill="none" />
+                                <text x="8" y="13" font-size="7px" font-family="Arial" fill="#555">1</text>
+                                <text x="8" y="48" font-size="7px" font-family="Arial" fill="#555">0</text>
+                                <text x="38" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">a</text>
+                                <text x="118" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">b</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="formula math" style="font-size: 5.2pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>Linear Naik:</b></span> μ(x) = <span class="frac"><span
+                                class="num">x−a</span><span class="den">b−a</span></span> &nbsp;<span class="fn">[a ≤ x
+                            ≤ b]</span><br>
+                        <span class="fn"><b>Linear Turun:</b></span> μ(x) = <span class="frac"><span
+                                class="num">b−x</span><span class="den">b−a</span></span> &nbsp;<span class="fn">[a ≤ x
+                            ≤ b]</span>
+                    </div>
+
+                    <!-- Row 2: Segitiga & Trapesium -->
+                    <div class="diagram-row">
+                        <div class="diagram-container">
+                            <span style="font-size: 5pt; font-weight: bold; color: #4a0070;">Segitiga [a, b, c]</span>
+                            <svg class="diagram-svg" viewBox="0 0 160 55">
+                                <line x1="15" y1="45" x2="150" y2="45" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="5" x2="20" y2="48" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="10" x2="80" y2="10" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="80" y1="10" x2="80" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <path d="M 15,45 L 30,45 L 80,10 L 130,45 L 150,45" stroke="#8a2be2" stroke-width="1.2"
+                                    fill="none" />
+                                <text x="8" y="13" font-size="7px" font-family="Arial" fill="#555">1</text>
+                                <text x="8" y="48" font-size="7px" font-family="Arial" fill="#555">0</text>
+                                <text x="28" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">a</text>
+                                <text x="78" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">b</text>
+                                <text x="128" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">c</text>
+                            </svg>
+                        </div>
+                        <div class="diagram-container">
+                            <span style="font-size: 5pt; font-weight: bold; color: #4a0070;">Trapesium [a, b, c,
+                                d]</span>
+                            <svg class="diagram-svg" viewBox="0 0 160 55">
+                                <line x1="15" y1="45" x2="150" y2="45" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="5" x2="20" y2="48" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="10" x2="60" y2="10" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="60" y1="10" x2="60" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="100" y1="10" x2="100" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <path d="M 15,45 L 30,45 L 60,10 L 100,10 L 130,45 L 150,45" stroke="#8a2be2"
+                                    stroke-width="1.2" fill="none" />
+                                <text x="8" y="13" font-size="7px" font-family="Arial" fill="#555">1</text>
+                                <text x="8" y="48" font-size="7px" font-family="Arial" fill="#555">0</text>
+                                <text x="28" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">a</text>
+                                <text x="58" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">b</text>
+                                <text x="98" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">c</text>
+                                <text x="128" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">d</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="formula math" style="font-size: 5.2pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>Segitiga:</b></span> <span class="frac"><span class="num">x−a</span><span
+                                class="den">b−a</span></span> <span class="fn">[a≤x≤b]</span> <span class="op">|</span>
+                        <span class="frac"><span class="num">c−x</span><span class="den">c−b</span></span> <span
+                            class="fn">[b≤x≤c]</span><br>
+                        <span class="fn"><b>Trapesium:</b></span> <span class="frac"><span class="num">x−a</span><span
+                                class="den">b−a</span></span> <span class="fn">[a≤x≤b]</span> <span class="op">|</span>
+                        1 <span class="fn">[b≤x≤c]</span> <span class="op">|</span> <span class="frac"><span
+                                class="num">d−x</span><span class="den">d−c</span></span> <span
+                            class="fn">[c≤x≤d]</span>
+                    </div>
+
+                    <!-- Row 3: Kurva-S -->
+                    <div class="diagram-row">
+                        <div class="diagram-container" style="width: 100%;">
+                            <span style="font-size: 5pt; font-weight: bold; color: #4a0070;">Kurva-S (Sigmoid) [α, β, γ]
+                                — β = (α+γ)/2</span>
+                            <svg class="diagram-svg" viewBox="0 0 160 55" style="max-height: 38px;">
+                                <line x1="15" y1="45" x2="150" y2="45" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="5" x2="20" y2="48" stroke="#ccc" stroke-width="0.5" />
+                                <line x1="20" y1="10" x2="130" y2="10" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="20" y1="27.5" x2="80" y2="27.5" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="80" y1="27.5" x2="80" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <line x1="130" y1="10" x2="130" y2="45" stroke="#aaa" stroke-width="0.5"
+                                    stroke-dasharray="2,2" />
+                                <path d="M 15,45 L 30,45 C 55,45 65,27.5 80,27.5 C 95,27.5 105,10 130,10 L 150,10"
+                                    stroke="#8a2be2" stroke-width="1.2" fill="none" />
+                                <text x="8" y="13" font-size="7px" font-family="Arial" fill="#555">1</text>
+                                <text x="2" y="30" font-size="6px" font-family="Arial" fill="#555">0.5</text>
+                                <text x="8" y="48" font-size="7px" font-family="Arial" fill="#555">0</text>
+                                <text x="28" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">α</text>
+                                <text x="78" y="53" font-size="7px" font-family="Arial" font-weight="bold" fill="#333">β
+                                    (mid)</text>
+                                <text x="128" y="53" font-size="7px" font-family="Arial" font-weight="bold"
+                                    fill="#333">γ</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="formula math" style="font-size: 5.2pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>Kurva-S (Sigmoid) Naik:</b></span> (β = <span class="frac"><span
+                                class="num">α+γ</span><span class="den">2</span></span> = <span class="fn">titik
+                            tengah</span>, μ=0.5)<br>
+                        μ(x) = 0 <span class="fn">; x ≤ α</span> &nbsp;<span class="op">|</span>&nbsp; 2·<span
+                            class="frac"><span class="num">(x−α)<sup>2</sup></span><span
+                                class="den">(γ−α)<sup>2</sup></span></span> <span class="fn">; α &lt; x ≤ β</span><br>
+                        μ(x) = 1 − 2·<span class="frac"><span class="num">(γ−x)<sup>2</sup></span><span
+                                class="den">(γ−α)<sup>2</sup></span></span> <span class="fn">; β &lt; x &lt; γ</span>
+                        &nbsp;<span class="op">|</span>&nbsp; 1 <span class="fn">; x ≥ γ</span>
+                    </div>
+
+                    <div class="ok" style="font-size: 5.5pt; padding: 0.4mm 0.8mm;"><b>TIPS HITUNG CEPAT:</b>
+                        - Jika x tepat di titik tengah β, maka <b>μ(x) = 0.5</b>
+                        - Jika x < α atau x> d/γ, maka <b>μ(x) = 0</b>
+                            - Jika x di plateau trapesium [b,c], maka <b>μ(x) = 1</b></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh purple">📈 FUZZIFIKASI</div>
+                <div class="bc">
+                    <p>Konversi nilai crisp → derajat keanggotaan untuk SETIAP himpunan fuzzy</p>
+                    <div class="formula">CONTOH: Harga Saham = 1600 IDR
+                        Baca grafik MF untuk setiap set (SangatMurah,Murah,Sedang,Mahal):
+                        μ_SangatMurah(1600) = ? [dari MF graph SangatMurah]
+                        μ_Murah(1600) = ? [dari MF graph Murah]
+                        μ_Sedang(1600) = ? [dst...]
+                        μ_Mahal(1600) = ?
+
+                        CARA BACA GRAFIK: identifikasi breakpoints [a,b,c] atau [a,b,c,d]
+                        lalu substitusi x=1600 ke formula yang sesuai posisinya</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COL 2: MAMDANI + SUGENO -->
+        <div class="col">
+            <div class="box">
+                <div class="bh orange">🔵 FUZZY MAMDANI — 4 TAHAP</div>
+                <div class="bc">
+                    <div class="sub">TAHAP 1: FUZZIFIKASI</div>
+                    <p>Hitung μ(x) setiap input untuk setiap himpunan fuzzy</p>
+
+                    <div class="sub">TAHAP 2: INFERENSI / RULE EVALUATION</div>
+                    <div class="formula">Operator anteseden:
+                        AND → min(μ₁, μ₂) ← ambil yang TERKECIL
+                        OR → max(μ₁, μ₂) ← ambil yang TERBESAR
+                        NOT → 1 - μ
+
+                        Firing strength α = hasil operator di anteseden
+                        Output: clip/scale MF konsekuen pada level α</div>
+                    <p><b>Contoh:</b> IF x is A3 (μ=0.0) OR y is B1 (μ=0.1) → z is C1 (0.1)</p>
+                    <p><b>Contoh:</b> IF x is A2 (μ=0.2) AND y is B2 (μ=0.7) → z is C2 (min=0.2)</p>
+
+                    <div class="sub">TAHAP 3: AGREGASI</div>
+                    <p>Gabung semua output rule → SATU himpunan fuzzy tunggal (ambil MAX di setiap titik z)</p>
+
+                    <div class="sub">TAHAP 4: DEFUZZIFIKASI</div>
+                    <table>
+                        <tr>
+                            <th>Metode</th>
+                            <th>Cara</th>
+                        </tr>
+                        <tr>
+                            <td><b>COG/COA</b></td>
+                            <td>Centre of Gravity: ∫z·μ(z)dz / ∫μ(z)dz</td>
+                        </tr>
+                        <tr>
+                            <td>BOA</td>
+                            <td>Bisector of Area: garis bagi area jadi 2 sama</td>
+                        </tr>
+                        <tr>
+                            <td>MOM</td>
+                            <td>Mean of Maximum: rata-rata nilai dengan μ tertinggi</td>
+                        </tr>
+                        <tr>
+                            <td>SOM</td>
+                            <td>Smallest of Maximum: nilai terkecil dari μ max</td>
+                        </tr>
+                        <tr>
+                            <td>LOM</td>
+                            <td>Largest of Maximum: nilai terbesar dari μ max</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh orange">📊 COG MAMDANI (DISKRIT)</div>
+                <div class="bc">
+                    <div class="formula math" style="font-size: 5pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        z* = <span class="frac"><span class="num">Σ(zᵢ · μ(zᵢ))</span><span
+                                class="den">Σμ(zᵢ)</span></span><br><br>
+                        <span class="fn"><b>CONTOH (dari slide):</b></span><br>
+                        C1(μ=0.1): z=0,10,20 → Σ(z·μ) = 0.1·0 + 0.1·10 + 0.1·20 = 3<br>
+                        C2(μ=0.2): z=30,40,50,60 → Σ(z·μ) = 0.2·(30+40+50+60) = 36<br>
+                        C3(μ=0.5): z=70,80,90,100 → Σ(z·μ) = 0.5·(70+80+90+100)=170<br><br>
+                        Pembilang: Σ(z·μ) = 3+36+170 = 209<br>
+                        Penyebut: Σμ = 0.1+0.1+0.1+0.2+0.2+0.2+0.2+0.5+0.5+0.5+0.5 = 3.1<br><br>
+                        <span class="fn"><b>z* =</b></span> <span class="frac"><span class="num">209</span><span
+                                class="den">3.1</span></span> ≈ <b>67.4</b> <span class="fn">← Crisp output
+                            Mamdani</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh teal">🔴 FUZZY SUGENO</div>
+                <div class="bc">
+                    <div class="warn"><b>PERBEDAAN UTAMA dari Mamdani:</b><br>
+                        Konsekuen = fungsi matematika, BUKAN himpunan fuzzy<br>
+                        → Orde-0: z = k (konstanta, contoh: 90%, 60%, 30%)<br>
+                        → Orde-1: z = ax + by + c (fungsi linear dari input)</div>
+
+                    <div class="formula math" style="font-size: 5pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>DEFUZZIFIKASI SUGENO — WEIGHTED AVERAGE (WA):</b></span><br>
+                        z* = <span class="frac"><span class="num">Σ(μᵢ · kᵢ)</span><span
+                                class="den">Σμᵢ</span></span><br><br>
+                        <span class="fn"><b>dimana:</b><br>
+                            μᵢ = firing strength rule ke-i (hasil AND/OR anteseden)<br>
+                            kᵢ = output rule ke-i. <b>(Jika Orde-1 (z=ax+by), hitung kᵢ substitusi nilai crisp input ke
+                                polinomial!)</b></span>
+                    </div>
+
+                    <div class="sub">Contoh Sugeno Orde-1 (Prediksi AC):</div>
+                    <div class="formula math" style="font-size: 5pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>Input:</b> Suhu (x) = 35, Orang (y) = 15</span><br>
+                        <span class="fn"><b>Rule 1:</b> IF Panas AND Ramai THEN z = 2x + 3y + 10. (Misal μ₁ =
+                            0.6)</span><br>
+                        <span class="fn">→ Hitung k₁: substitusi x=35, y=15</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;k₁ = 2(35) + 3(15) + 10 = 70 + 45 + 10 = <b>125</b><br><br>
+                        <span class="fn"><b>Rule 2:</b> IF Panas AND Sepi THEN z = 1.5x + y + 5. (Misal μ₂ =
+                            0.2)</span><br>
+                        <span class="fn">→ Hitung k₂: substitusi x=35, y=15</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;k₂ = 1.5(35) + 15 + 5 = 52.5 + 20 = <b>72.5</b><br><br>
+                        <span class="fn"><b>WA =</b></span> <span class="frac"><span class="num">0.6·125 +
+                                0.2·72.5</span><span class="den">0.6+0.2</span></span> <span class="fn">=</span> <span
+                            class="frac"><span class="num">75 + 14.5</span><span class="den">0.8</span></span> = <span
+                            class="frac"><span class="num">89.5</span><span class="den">0.8</span></span> ≈
+                        <b>111.87</b>
+                    </div>
+
+                    <div class="ok">Sugeno jauh lebih EFISIEN karena tidak perlu integrasi area!<br>Tapi kehilangan
+                        interpretabilitas linguistik (less human-like)</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh orange">📐 KASUS TITIK BERAT (COG) MAMDANI KONTINU</div>
+                <div class="bc" style="padding: 0.5mm 1mm;">
+                    <div class="sub" style="margin-top:0;">1. Segitiga Terpotong (Trapesium)</div>
+                    <div style="display: flex; gap: 0.5mm; align-items: center; margin-bottom: 0.5mm;">
+                        <svg viewBox="0 0 100 40" width="30%" style="border: 0.3pt solid #ccc; background:#fff;">
+                            <polygon points="10,35 50,5 90,35" fill="none" stroke="#ddd" stroke-width="0.5" stroke-dasharray="2,2"/>
+                            <polygon points="10,35 30,20 70,20 90,35" fill="rgba(255,165,0,0.3)" stroke="orange" stroke-width="1"/>
+                            <line x1="10" y1="35" x2="90" y2="35" stroke="black" stroke-width="0.5"/>
+                            <text x="10" y="39" font-size="4" text-anchor="middle">a</text>
+                            <text x="50" y="39" font-size="4" text-anchor="middle">b (x̄)</text>
+                            <text x="90" y="39" font-size="4" text-anchor="middle">c</text>
+                            <text x="2" y="21" font-size="4">μ</text>
+                            <line x1="8" y1="20" x2="30" y2="20" stroke="black" stroke-width="0.3" stroke-dasharray="1,1"/>
+                            <line x1="50" y1="20" x2="50" y2="35" stroke="red" stroke-width="0.8"/>
+                        </svg>
+                        <div class="formula math" style="font-size: 4.5pt; flex: 1; padding: 0.3mm;">
+                            <span class="fn"><b>Variabel:</b> a=kiri, b=puncak, c=kanan, μ=tinggi potongan</span><br>
+                            <span class="fn"><b>Luas (A)</b> = ½ × μ × ( (c−a) + LebarAtas )</span><br>
+                            <span class="fn">LebarAtas = (c−a) × (1−μ)</span> <span style="color:#666; font-size:4pt;">*Simetris</span><br>
+                            <span class="fn"><b>Titik Berat (x̄)</b> = b</span> <span style="color:#666; font-size:4pt;">*Bila segitiga awal simetris</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sub">2. Segi Empat (Rectangle)</div>
+                    <div style="display: flex; gap: 0.5mm; align-items: center; margin-bottom: 0.5mm;">
+                        <svg viewBox="0 0 100 30" width="30%" style="border: 0.3pt solid #ccc; background:#fff;">
+                            <rect x="20" y="10" width="60" height="20" fill="rgba(0,128,128,0.3)" stroke="teal" stroke-width="1"/>
+                            <line x1="10" y1="30" x2="90" y2="30" stroke="black" stroke-width="0.5"/>
+                            <text x="20" y="34" font-size="4" text-anchor="middle">x₁</text>
+                            <text x="50" y="34" font-size="4" text-anchor="middle">x̄</text>
+                            <text x="80" y="34" font-size="4" text-anchor="middle">x₂</text>
+                            <text x="5" y="12" font-size="4">μ</text>
+                            <line x1="8" y1="10" x2="20" y2="10" stroke="black" stroke-width="0.3" stroke-dasharray="1,1"/>
+                            <line x1="50" y1="10" x2="50" y2="30" stroke="red" stroke-width="0.8"/>
+                        </svg>
+                        <div class="formula math" style="font-size: 4.5pt; flex: 1; padding: 0.3mm;">
+                            <span class="fn"><b>Luas (A)</b> = (x₂ − x₁) × μ</span><br>
+                            <span class="fn"><b>Titik Berat (x̄)</b> = </span> <span class="frac"><span class="num">x₁ + x₂</span><span class="den">2</span></span>
+                        </div>
+                    </div>
+
+                    <div class="sub">3. Titik Berat Gabungan (Composite)</div>
+                    <div class="formula math" style="font-size: 5pt; text-align: center; margin-bottom: 0.5mm; padding: 0.5mm;">
+                        <span class="fn"><b>COG<sub>total</sub> = </b></span> <span class="frac"><span class="num">(A₁ × x̄₁) + (A₂ × x̄₂) + ...</span><span class="den">A₁ + A₂ + ...</span></span>
+                    </div>
+                    <div class="warn" style="font-size: 5pt; padding: 0.5mm; word-wrap: break-word; white-space: normal;"><b>HACK UJIAN:</b> JANGAN integrasi kalkulus manual. Pisah area jadi segitiga & kotak, cari A dan x̄ masing2, gunakan rumus gabungan.</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">⚖ MAMDANI vs SUGENO</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Mamdani</th>
+                            <th>Sugeno</th>
+                        </tr>
+                        <tr>
+                            <td>Konsekuen</td>
+                            <td>Himpunan Fuzzy</td>
+                            <td>Konstanta / Fungsi</td>
+                        </tr>
+                        <tr>
+                            <td>Defuzz</td>
+                            <td>COG (integrasi berat)</td>
+                            <td>WA (rata-rata berbobot)</td>
+                        </tr>
+                        <tr>
+                            <td>Efisiensi</td>
+                            <td>❌ Rendah</td>
+                            <td>✅ Tinggi</td>
+                        </tr>
+                        <tr>
+                            <td>Interpretabilitas</td>
+                            <td>✅ Tinggi (human-like)</td>
+                            <td>❌ Rendah</td>
+                        </tr>
+                        <tr>
+                            <td>Penggunaan</td>
+                            <td>Sistem pakar, kontrol</td>
+                            <td>Optimasi, adaptive system</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- COL 3: TIPS + SUMMARY -->
+        <div class="col">
+            <div class="box">
+                <div class="bh teal">💡 TIPS SOAL FUZZY SUGENO (Q4)</div>
+                <div class="bc">
+                    <div class="sub">LANGKAH SISTEMATIS SOAL Q4:</div>
+                    <ol>
+                        <li><b>Baca setiap grafik MF:</b><br>
+                            Identifikasi tipe (segitiga/trapesium/linear)<br>
+                            Catat breakpoints: [a,b,c] atau [a,b,c,d]</li>
+                        <li><b>Fuzzifikasi tiap variabel input:</b><br>
+                            Hitung μ untuk SETIAP himpunan di setiap variabel<br>
+                            Gunakan formula sesuai posisi x terhadap breakpoints<br>
+                            Jika x di luar range → μ=0, jika di plateau → μ=1</li>
+                        <li><b>Evaluasi setiap rule:</b><br>
+                            AND: ambil min(μ₁, μ₂, ...) semua anteseden<br>
+                            OR: ambil max(μ₁, μ₂) dari anteseden<br>
+                            Jika rule tidak aktif (μ=0): skip!</li>
+                        <li><b>Kumpulkan pasangan (μᵢ, kᵢ):</b><br>
+                            Hanya untuk rule yang aktif (μᵢ &gt; 0)</li>
+                        <li><b>Hitung WA:</b><br>
+                            z* = Σ(μᵢ·kᵢ) / Σμᵢ</li>
+                    </ol>
+                    <div class="warn"><b>HATI-HATI Q4 SOAL EAS:</b><br>
+                        Rule dengan OR: AKTIF jika SALAH SATU terpenuhi<br>
+                        → firing strength = MAX dari semua komponen OR<br>
+                        Jika ada 3 input (Harga, Volatilitas, Volume): rule bisa AND kombinasi ketiganya<br>
+                        Pastikan baca setiap rule dengan benar!</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh teal">📝 SIMULASI Q4 EAS (Saham ABC)</div>
+                <div class="bc">
+                    <div class="formula math" style="font-size: 5pt; padding: 0.3mm 0.8mm; line-height: 1.1;">
+                        <span class="fn"><b>Input:</b> Harga=1600IDR, Vol=13.5%, Volume=950lot</span><br><br>
+                        <span class="fn"><b>LANGKAH (setelah baca grafik):</b><br>Misal hasil fuzzifikasi:</span><br>
+                        <span class="fn">Harga: μ_SM=0, μ_M=0.8, μ_Sedang=0.2, μ_Mahal=0<br>
+                            Vol: &nbsp;&nbsp;μ_Stabil=0, μ_Sedang=0.7, μ_Tinggi=0.3<br>
+                            Volume:μ_SR=0, μ_R=0, μ_Sedang=0.5, μ_Tinggi=0.5</span><br><br>
+                        <span class="fn"><b>Rule 1:</b> IF H.SangatMurah AND Vol.Tinggi AND Vol.Stabil →
+                            k1=90%</span><br>
+                        &nbsp;&nbsp;μ1 = <span class="fn">min</span>(0, 0.3, 0) = 0 <span class="fn">→ SKIP (tidak
+                            aktif)</span><br><br>
+                        <span class="fn"><b>Rule 2:</b> IF H.Murah AND Vol.Sedang AND Vol.Sedang → k2=60%</span><br>
+                        &nbsp;&nbsp;μ2 = <span class="fn">min</span>(0.8, 0.5, 0.7) = 0.5 <span class="fn">→
+                            AKTIF</span><br><br>
+                        <span class="fn"><b>Rule 3:</b> IF H.Sedang OR Vol.Tinggi → k3=60%</span><br>
+                        &nbsp;&nbsp;μ3 = <span class="fn">max</span>(0.2, 0.3) = 0.3 <span class="fn">→
+                            AKTIF</span><br><br>
+                        <span class="fn"><b>Rule 4:</b> IF H.Mahal OR Vol.Tinggi → k4=30%</span><br>
+                        &nbsp;&nbsp;μ4 = <span class="fn">max</span>(0, 0.3) = 0.3 <span class="fn">→
+                            AKTIF</span><br><br>
+                        <span class="fn">WA =</span> <span class="frac"><span class="num">0.5·60 + 0.3·60 +
+                                0.3·30</span><span class="den">0.5+0.3+0.3</span></span><br>
+                        <span class="fn">&nbsp;&nbsp;&nbsp;=</span> <span class="frac"><span class="num">30 + 18 +
+                                9</span><span class="den">1.1</span></span> <span class="fn">=</span> <span
+                            class="frac"><span class="num">57</span><span class="den">1.1</span></span> ≈ <b>51.8%</b>
+                    </div>
+                    <p style="font-size:5.5pt;color:#666">*Nilai μ di atas adalah contoh. Baca grafik aktual untuk nilai
+                        tepat!</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">🎓 RINGKASAN SEMUA TOPIK EAS</div>
+                <div class="bc">
+                    <table>
+                        <tr>
+                            <th>Topik</th>
+                            <th>Hal Paling Penting</th>
+                        </tr>
+                        <tr>
+                            <td><b>Adversarial</b><br>Q3</td>
+                            <td>Minimax dari leaf ke root; α-β: update α/β, cek pruning setelah setiap child; catat node
+                                yg dipruning</td>
+                        </tr>
+                        <tr>
+                            <td><b>CSP</b><br>Q1</td>
+                            <td>Formulasi (V,D,C); constraint graph; FC: hapus nilai inkon dari neighbor; BT: satu var
+                                at a time</td>
+                        </tr>
+                        <tr>
+                            <td><b>FOL</b><br>Q2</td>
+                            <td>∀→⇒, ∃→∧; CNF 7 langkah; Resolution: negate goal dulu; Forward/Backward chaining</td>
+                        </tr>
+                        <tr>
+                            <td><b>Fuzzy</b><br>Q4</td>
+                            <td>Baca MF graph; Fuzzifikasi; AND=min, OR=max; Mamdani=COG; Sugeno=WA; tulis semua
+                                langkah!</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh gray">🔑 QUICK FORMULA SHEET</div>
+                <div class="bc">
+                    <div class="formula math"
+                        style="font-size: 4.8pt; padding: 0.3mm 0.8mm; line-height: 1.1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.5mm;">
+                        <div>
+                            <span class="fn"><b>━━ MINIMAX ━━</b><br>MAX node: max(children)<br>MIN node:
+                                min(children)<br>Propagasi dari leaf ke root</span><br><br>
+                            <span class="fn"><b>━━ ALPHA-BETA ━━</b><br>Init: α=-∞, β=+∞ di root<br>MAX: α←max(α,child);
+                                prune jika α≥β<br>MIN: β←min(β,child); prune jika β≤α</span><br><br>
+                            <span class="fn"><b>━━ CSP ORDERING ━━</b><br>MRV: var dgn paling sedikit nilai
+                                legal<br>MCV: tiebreaker, var dgn constraint max<br>LCV: nilai yg hapus min pilihan
+                                neighbor</span><br><br>
+                            <span class="fn"><b>━━ CSP CHECKS ━━</b><br>FC: hapus inkon dari Dj. Dj=∅→Backtrack<br>AC-3:
+                                ∀x∈Di, ∃y∈Dj konsisten dg x</span>
+                        </div>
+                        <div>
+                            <span class="fn"><b>━━ FOL CNF ━━</b><br>⟺ → ⇒ → ¬dalam → standard → Skolem → drop∀ →
+                                dist∨</span><br><br>
+                            <span class="fn"><b>━━ RESOLUTION ━━</b><br>Tambah ¬Goal, resolve → {} =
+                                terbukti</span><br><br>
+                            <span class="fn"><b>━━ MF FORMULAS ━━</b></span><br>
+                            Segitiga: <span class="frac"><span class="num">x−a</span><span class="den">b−a</span></span>
+                            , <span class="frac"><span class="num">c−x</span><span class="den">c−b</span></span><br>
+                            Trapesium: <span class="frac"><span class="num">x−a</span><span
+                                    class="den">b−a</span></span> , <span class="frac"><span class="num">d−x</span><span
+                                    class="den">d−c</span></span><br><br>
+                            <span class="fn"><b>━━ DEFUZZIFIKASI ━━</b></span><br>
+                            Mamdani COG: <span class="frac"><span class="num">Σ(z·μ(z))</span><span
+                                    class="den">Σμ(z)</span></span><br>
+                            Sugeno WA: <span class="frac"><span class="num">Σ(μᵢ·kᵢ)</span><span
+                                    class="den">Σμᵢ</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="bh red">⚠ JEBAKAN UMUM UJIAN</div>
+                <div class="bc">
+                    <ul>
+                        <li>🚫 α-β: jangan prune sebelum UPDATE α atau β dulu!</li>
+                        <li>🚫 CSP: domain berbeda dari constraint — jangan campur!</li>
+                        <li>🚫 FOL: ∀ dengan ∧ atau ∃ dengan ⇒ = SALAH FATAL</li>
+                        <li>🚫 CNF: JANGAN skip Skolemize — ∃ harus hilang!</li>
+                        <li>🚫 Resolution: SELALU negate goal sebelum resolve!</li>
+                        <li>🚫 Fuzzy: AND=min (BUKAN max), OR=max (BUKAN min)</li>
+                        <li>🚫 Mamdani defuzz=COG; Sugeno defuzz=WA (BEDA!)</li>
+                        <li>🚫 Segitiga: cek apakah x naik atau turun dari puncak!</li>
+                        <li>✅ Tulis SEMUA langkah perhitungan untuk full marks!</li>
+                        <li>✅ Pada soal fuzzy: sebutkan rule yg aktif dan yg tidak!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">KKA CHEATSHEET · ITS Teknik Informatika · Open Note 1 Lembar A4 · Halaman 2/2 | Logika
+            Fuzzy | Mamdani | Sugeno | Semangat Profesor! 🎯</div>
+    </div>
+
+</body>
+
+</html>

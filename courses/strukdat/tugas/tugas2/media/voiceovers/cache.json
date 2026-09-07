@@ -1,0 +1,200 @@
+[
+  {
+    "input_text": "Kita akan menyelesaikan masalah Minimum Coins to Buy Fruits, menggunakan Dynamic Programming dengan optimasi Monotonic Deque.",
+    "input_data": {
+      "input_text": "Kita akan menyelesaikan masalah Minimum Coins to Buy Fruits, menggunakan Dynamic Programming dengan optimasi Monotonic Deque.",
+      "service": "gtts"
+    },
+    "original_audio": "kita-akan-menyelesaikan-masalah-minimum-coins-to-8a4ff4ba.mp3",
+    "final_audio": "kita-akan-menyelesaikan-masalah-minimum-coins-to-8a4ff4ba.mp3"
+  },
+  {
+    "input_text": "Aturannya sederhana. Jika kita membeli buah ke i, maka kita mendapatkan i plus 1 buah berikutnya secara gratis. Tujuan kita adalah meminimalkan total biaya.",
+    "input_data": {
+      "input_text": "Aturannya sederhana. Jika kita membeli buah ke i, maka kita mendapatkan i plus 1 buah berikutnya secara gratis. Tujuan kita adalah meminimalkan total biaya.",
+      "service": "gtts"
+    },
+    "original_audio": "aturannya-sederhana-jika-kita-membeli-buah-ke-i-d6142a2f.mp3",
+    "final_audio": "aturannya-sederhana-jika-kita-membeli-buah-ke-i-d6142a2f.mp3"
+  },
+  {
+    "input_text": "Input yang kita gunakan adalah prices sama dengan 1, 6, 1, 2, 4.",
+    "input_data": {
+      "input_text": "Input yang kita gunakan adalah prices sama dengan 1, 6, 1, 2, 4.",
+      "service": "gtts"
+    },
+    "original_audio": "input-yang-kita-gunakan-adalah-prices-sama-dengan-21ff7c9a.mp3",
+    "final_audio": "input-yang-kita-gunakan-adalah-prices-sama-dengan-21ff7c9a.mp3"
+  },
+  {
+    "input_text": "Pertama, kita siapkan array prices berisi harga tiap buah, dan array dp berisi 6 sel yang diinisialisasi nol. dp i menyimpan biaya minimum dari index i sampai akhir.",
+    "input_data": {
+      "input_text": "Pertama, kita siapkan array prices berisi harga tiap buah, dan array dp berisi 6 sel yang diinisialisasi nol. dp i menyimpan biaya minimum dari index i sampai akhir.",
+      "service": "gtts"
+    },
+    "original_audio": "pertama-kita-siapkan-array-prices-berisi-harga-76b9f6e0.mp3",
+    "final_audio": "pertama-kita-siapkan-array-prices-berisi-harga-76b9f6e0.mp3"
+  },
+  {
+    "input_text": "Kita juga menyiapkan deque untuk menyimpan kandidat index terbaik secara efisien.",
+    "input_data": {
+      "input_text": "Kita juga menyiapkan deque untuk menyimpan kandidat index terbaik secara efisien.",
+      "service": "gtts"
+    },
+    "original_audio": "kita-juga-menyiapkan-deque-untuk-menyimpan-601aff5c.mp3",
+    "final_audio": "kita-juga-menyiapkan-deque-untuk-menyimpan-601aff5c.mp3"
+  },
+  {
+    "input_text": "Iterasi pertama, i sama dengan 4. Harga buah ke-4 adalah 4. Ini buah terakhir, tidak ada buah gratis setelahnya. Kita masukkan index 5 ke deque. dp 4 sama dengan 4 plus dp 5, yaitu 4.",
+    "input_data": {
+      "input_text": "Iterasi pertama, i sama dengan 4. Harga buah ke-4 adalah 4. Ini buah terakhir, tidak ada buah gratis setelahnya. Kita masukkan index 5 ke deque. dp 4 sama dengan 4 plus dp 5, yaitu 4.",
+      "service": "gtts"
+    },
+    "original_audio": "iterasi-pertama-i-sama-dengan-4-harga-buah-ke-4-d8e5c21b.mp3",
+    "final_audio": "iterasi-pertama-i-sama-dengan-4-harga-buah-ke-4-d8e5c21b.mp3"
+  },
+  {
+    "input_text": "Sekarang i sama dengan 3, harga 2. Jika beli buah ini, buah ke-4 gratis. Masukkan index 4 ke deque. Depan deque adalah index 5 dengan dp 0, jadi dp 3 sama dengan 2 plus 0, yaitu 2.",
+    "input_data": {
+      "input_text": "Sekarang i sama dengan 3, harga 2. Jika beli buah ini, buah ke-4 gratis. Masukkan index 4 ke deque. Depan deque adalah index 5 dengan dp 0, jadi dp 3 sama dengan 2 plus 0, yaitu 2.",
+      "service": "gtts"
+    },
+    "original_audio": "sekarang-i-sama-dengan-3-harga-2-jika-beli-buah-5a2f937e.mp3",
+    "final_audio": "sekarang-i-sama-dengan-3-harga-2-jika-beli-buah-5a2f937e.mp3"
+  },
+  {
+    "input_text": "i sama dengan 2, harga 1. Jika beli, buah ke-3 sampai ke-4 gratis. Kita pop index 4 dari belakang deque karena dp 3 lebih kecil dari dp 4. Masukkan index 3. Depan deque tetap index 5, jadi dp 2 sama dengan 1 plus 0, yaitu 1.",
+    "input_data": {
+      "input_text": "i sama dengan 2, harga 1. Jika beli, buah ke-3 sampai ke-4 gratis. Kita pop index 4 dari belakang deque karena dp 3 lebih kecil dari dp 4. Masukkan index 3. Depan deque tetap index 5, jadi dp 2 sama dengan 1 plus 0, yaitu 1.",
+      "service": "gtts"
+    },
+    "original_audio": "i-sama-dengan-2-harga-1-jika-beli-buah-ke-3-sampai-365b5035.mp3",
+    "final_audio": "i-sama-dengan-2-harga-1-jika-beli-buah-ke-3-sampai-365b5035.mp3"
+  },
+  {
+    "input_text": "i sama dengan 1, harga 6. Jika beli, buah ke-2 gratis. Pop index 3 dari belakang karena dp 2 lebih kecil. Masukkan index 2. Lalu expire index 5 dari depan karena sudah di luar jangkauan. Depan deque sekarang index 2 dengan dp 1, jadi dp 1 sama dengan 6 plus 1, yaitu 7.",
+    "input_data": {
+      "input_text": "i sama dengan 1, harga 6. Jika beli, buah ke-2 gratis. Pop index 3 dari belakang karena dp 2 lebih kecil. Masukkan index 2. Lalu expire index 5 dari depan karena sudah di luar jangkauan. Depan deque sekarang index 2 dengan dp 1, jadi dp 1 sama dengan 6 plus 1, yaitu 7.",
+      "service": "gtts"
+    },
+    "original_audio": "i-sama-dengan-1-harga-6-jika-beli-buah-ke-2-gratis-5773a969.mp3",
+    "final_audio": "i-sama-dengan-1-harga-6-jika-beli-buah-ke-2-gratis-5773a969.mp3"
+  },
+  {
+    "input_text": "Terakhir, i sama dengan 0, harga 1. Jika beli, buah ke-1 gratis. Masukkan index 1 ke deque. Depan deque adalah index 2 dengan dp 1, jadi dp 0 sama dengan 1 plus 1, yaitu 2.",
+    "input_data": {
+      "input_text": "Terakhir, i sama dengan 0, harga 1. Jika beli, buah ke-1 gratis. Masukkan index 1 ke deque. Depan deque adalah index 2 dengan dp 1, jadi dp 0 sama dengan 1 plus 1, yaitu 2.",
+      "service": "gtts"
+    },
+    "original_audio": "terakhir-i-sama-dengan-0-harga-1-jika-beli-buah-ke-04fda3a7.mp3",
+    "final_audio": "terakhir-i-sama-dengan-0-harga-1-jika-beli-buah-ke-04fda3a7.mp3"
+  },
+  {
+    "input_text": "Jawaban akhirnya adalah dp 0 sama dengan 2. Strategi optimalnya: beli buah ke-0 dengan harga 1, dapat buah ke-1 gratis. Lalu beli buah ke-2 dengan harga 1, dapat buah ke-3 dan ke-4 gratis. Total biaya hanya 2.",
+    "input_data": {
+      "input_text": "Jawaban akhirnya adalah dp 0 sama dengan 2. Strategi optimalnya: beli buah ke-0 dengan harga 1, dapat buah ke-1 gratis. Lalu beli buah ke-2 dengan harga 1, dapat buah ke-3 dan ke-4 gratis. Total biaya hanya 2.",
+      "service": "gtts"
+    },
+    "original_audio": "jawaban-akhirnya-adalah-dp-0-sama-dengan-2-b46136ba.mp3",
+    "final_audio": "jawaban-akhirnya-adalah-dp-0-sama-dengan-2-b46136ba.mp3"
+  },
+  {
+    "input_text": "Kita akan menyelesaikan masalah Minimum Coins to Buy Fruits, menggunakan Dynamic Programming dengan optimasi Monotonic Deque.",
+    "input_data": {
+      "input_text": "Kita akan menyelesaikan masalah Minimum Coins to Buy Fruits, menggunakan Dynamic Programming dengan optimasi Monotonic Deque.",
+      "service": "gtts"
+    },
+    "original_audio": "kita-akan-menyelesaikan-masalah-minimum-coins-to-8a4ff4ba.mp3",
+    "final_audio": "kita-akan-menyelesaikan-masalah-minimum-coins-to-8a4ff4ba.mp3"
+  },
+  {
+    "input_text": "Aturannya sederhana. Jika kita membeli buah ke i, maka kita mendapatkan i plus 1 buah berikutnya secara gratis. Tujuan kita adalah meminimalkan total biaya.",
+    "input_data": {
+      "input_text": "Aturannya sederhana. Jika kita membeli buah ke i, maka kita mendapatkan i plus 1 buah berikutnya secara gratis. Tujuan kita adalah meminimalkan total biaya.",
+      "service": "gtts"
+    },
+    "original_audio": "aturannya-sederhana-jika-kita-membeli-buah-ke-i-d6142a2f.mp3",
+    "final_audio": "aturannya-sederhana-jika-kita-membeli-buah-ke-i-d6142a2f.mp3"
+  },
+  {
+    "input_text": "Input yang kita gunakan adalah prices sama dengan 1, 6, 1, 2, 4.",
+    "input_data": {
+      "input_text": "Input yang kita gunakan adalah prices sama dengan 1, 6, 1, 2, 4.",
+      "service": "gtts"
+    },
+    "original_audio": "input-yang-kita-gunakan-adalah-prices-sama-dengan-21ff7c9a.mp3",
+    "final_audio": "input-yang-kita-gunakan-adalah-prices-sama-dengan-21ff7c9a.mp3"
+  },
+  {
+    "input_text": "Pertama, kita siapkan array prices berisi harga tiap buah, dan array dp berisi 6 sel yang diinisialisasi nol. dp i menyimpan biaya minimum dari index i sampai akhir.",
+    "input_data": {
+      "input_text": "Pertama, kita siapkan array prices berisi harga tiap buah, dan array dp berisi 6 sel yang diinisialisasi nol. dp i menyimpan biaya minimum dari index i sampai akhir.",
+      "service": "gtts"
+    },
+    "original_audio": "pertama-kita-siapkan-array-prices-berisi-harga-76b9f6e0.mp3",
+    "final_audio": "pertama-kita-siapkan-array-prices-berisi-harga-76b9f6e0.mp3"
+  },
+  {
+    "input_text": "Kita juga menyiapkan deque untuk menyimpan kandidat index terbaik secara efisien.",
+    "input_data": {
+      "input_text": "Kita juga menyiapkan deque untuk menyimpan kandidat index terbaik secara efisien.",
+      "service": "gtts"
+    },
+    "original_audio": "kita-juga-menyiapkan-deque-untuk-menyimpan-601aff5c.mp3",
+    "final_audio": "kita-juga-menyiapkan-deque-untuk-menyimpan-601aff5c.mp3"
+  },
+  {
+    "input_text": "Iterasi pertama, i sama dengan 4. Harga buah ke-4 adalah 4. Ini buah terakhir, tidak ada buah gratis setelahnya. Kita masukkan index 5 ke deque. dp 4 sama dengan 4 plus dp 5, yaitu 4.",
+    "input_data": {
+      "input_text": "Iterasi pertama, i sama dengan 4. Harga buah ke-4 adalah 4. Ini buah terakhir, tidak ada buah gratis setelahnya. Kita masukkan index 5 ke deque. dp 4 sama dengan 4 plus dp 5, yaitu 4.",
+      "service": "gtts"
+    },
+    "original_audio": "iterasi-pertama-i-sama-dengan-4-harga-buah-ke-4-d8e5c21b.mp3",
+    "final_audio": "iterasi-pertama-i-sama-dengan-4-harga-buah-ke-4-d8e5c21b.mp3"
+  },
+  {
+    "input_text": "Sekarang i sama dengan 3, harga 2. Jika beli buah ini, buah ke-4 gratis. Masukkan index 4 ke deque. Depan deque adalah index 5 dengan dp 0, jadi dp 3 sama dengan 2 plus 0, yaitu 2.",
+    "input_data": {
+      "input_text": "Sekarang i sama dengan 3, harga 2. Jika beli buah ini, buah ke-4 gratis. Masukkan index 4 ke deque. Depan deque adalah index 5 dengan dp 0, jadi dp 3 sama dengan 2 plus 0, yaitu 2.",
+      "service": "gtts"
+    },
+    "original_audio": "sekarang-i-sama-dengan-3-harga-2-jika-beli-buah-5a2f937e.mp3",
+    "final_audio": "sekarang-i-sama-dengan-3-harga-2-jika-beli-buah-5a2f937e.mp3"
+  },
+  {
+    "input_text": "i sama dengan 2, harga 1. Jika beli, buah ke-3 sampai ke-4 gratis. Kita pop index 4 dari belakang deque karena dp 3 lebih kecil dari dp 4. Masukkan index 3. Depan deque tetap index 5, jadi dp 2 sama dengan 1 plus 0, yaitu 1.",
+    "input_data": {
+      "input_text": "i sama dengan 2, harga 1. Jika beli, buah ke-3 sampai ke-4 gratis. Kita pop index 4 dari belakang deque karena dp 3 lebih kecil dari dp 4. Masukkan index 3. Depan deque tetap index 5, jadi dp 2 sama dengan 1 plus 0, yaitu 1.",
+      "service": "gtts"
+    },
+    "original_audio": "i-sama-dengan-2-harga-1-jika-beli-buah-ke-3-sampai-365b5035.mp3",
+    "final_audio": "i-sama-dengan-2-harga-1-jika-beli-buah-ke-3-sampai-365b5035.mp3"
+  },
+  {
+    "input_text": "i sama dengan 1, harga 6. Jika beli, buah ke-2 gratis. Pop index 3 dari belakang karena dp 2 lebih kecil. Masukkan index 2. Lalu expire index 5 dari depan karena sudah di luar jangkauan. Depan deque sekarang index 2 dengan dp 1, jadi dp 1 sama dengan 6 plus 1, yaitu 7.",
+    "input_data": {
+      "input_text": "i sama dengan 1, harga 6. Jika beli, buah ke-2 gratis. Pop index 3 dari belakang karena dp 2 lebih kecil. Masukkan index 2. Lalu expire index 5 dari depan karena sudah di luar jangkauan. Depan deque sekarang index 2 dengan dp 1, jadi dp 1 sama dengan 6 plus 1, yaitu 7.",
+      "service": "gtts"
+    },
+    "original_audio": "i-sama-dengan-1-harga-6-jika-beli-buah-ke-2-gratis-5773a969.mp3",
+    "final_audio": "i-sama-dengan-1-harga-6-jika-beli-buah-ke-2-gratis-5773a969.mp3"
+  },
+  {
+    "input_text": "Terakhir, i sama dengan 0, harga 1. Jika beli, buah ke-1 gratis. Masukkan index 1 ke deque. Depan deque adalah index 2 dengan dp 1, jadi dp 0 sama dengan 1 plus 1, yaitu 2.",
+    "input_data": {
+      "input_text": "Terakhir, i sama dengan 0, harga 1. Jika beli, buah ke-1 gratis. Masukkan index 1 ke deque. Depan deque adalah index 2 dengan dp 1, jadi dp 0 sama dengan 1 plus 1, yaitu 2.",
+      "service": "gtts"
+    },
+    "original_audio": "terakhir-i-sama-dengan-0-harga-1-jika-beli-buah-ke-04fda3a7.mp3",
+    "final_audio": "terakhir-i-sama-dengan-0-harga-1-jika-beli-buah-ke-04fda3a7.mp3"
+  },
+  {
+    "input_text": "Jawaban akhirnya adalah dp 0 sama dengan 2. Strategi optimalnya: beli buah ke-0 dengan harga 1, dapat buah ke-1 gratis. Lalu beli buah ke-2 dengan harga 1, dapat buah ke-3 dan ke-4 gratis. Total biaya hanya 2.",
+    "input_data": {
+      "input_text": "Jawaban akhirnya adalah dp 0 sama dengan 2. Strategi optimalnya: beli buah ke-0 dengan harga 1, dapat buah ke-1 gratis. Lalu beli buah ke-2 dengan harga 1, dapat buah ke-3 dan ke-4 gratis. Total biaya hanya 2.",
+      "service": "gtts"
+    },
+    "original_audio": "jawaban-akhirnya-adalah-dp-0-sama-dengan-2-b46136ba.mp3",
+    "final_audio": "jawaban-akhirnya-adalah-dp-0-sama-dengan-2-b46136ba.mp3"
+  }
+]

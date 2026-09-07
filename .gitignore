@@ -1,0 +1,55 @@
+# Virtual env & deps
+.venv/
+venv/
+venv-ppt/
+env/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+pip-log.txt
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+__MACOSX/
+*.lck
+*.tmp
+._*
+
+# Build & cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+*.o
+*.lo
+
+# Project specific excludes
+.godot/
+.import/
+export_presets.cfg.bak
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Original slides - PDF only policy (originals kept in source backup, not committed)
+# Uncomment if you accidentally copy originals:
+# courses/**/slides/originals/
+
+# Large generated media - keep via LFS, but ignore temp
+*.mp4.tmp
+*.m4a.tmp

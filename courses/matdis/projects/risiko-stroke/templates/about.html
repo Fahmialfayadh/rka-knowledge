@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="section-block">
+        <div class="section-header">
+            <h2 class="section-title" style="justify-content: center;">{{ t('about_title') }}</h2>
+            <div class="section-subtitle">{{ t('about_subtitle') }}</div>
+        </div>
+
+        <!-- CARD: Data Source & Thresholding -->
+        <div class="detail-card" style="margin-bottom: 2rem;">
+            <!--0. background aplikasi-->
+            <h3 class="Background" style="margin-bottom: 1rem;">
+                {{ t('background_title') }}
+            </h3>
+            <p style="color: var(--text-main); line-height: 1.7; margin-bottom: 2rem;">
+                {{ t('background_text') | safe }}
+            </p>
+            <!-- 1. Data Source -->
+            <h3 class="detail-title" style="margin-bottom: 1rem;">
+                {{ t('datasource_title') }}
+            </h3>
+            <p style="color: var(--text-main); line-height: 1.7; margin-bottom: 2rem;">
+                {{ t('datasource_text') | safe }}
+            </p>
+
+            <!-- 2. Thresholding -->
+            <h3 class="detail-title" style="margin-bottom: 1rem;">
+                {{ t('thresholding_title') }}
+            </h3>
+            <p style="color: var(--text-main); line-height: 1.7;">
+                {{ t('thresholding_text') | safe }}
+            </p>
+        </div>
+
+        <!-- CARD: Risk Categories -->
+        <div class="detail-card">
+
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+                <!-- LOW RISK -->
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem; padding: 1.5rem; border-left: 4px solid var(--success-color); background: #f0fdf4; border-radius: 0 8px 8px 0;">
+                    <div
+                        style="font-weight: 700; font-size: 1.1rem; color: var(--success-color); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        {{ t('low_risk_title') }} </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('low_risk_def_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('low_risk_def_text') }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('low_risk_just_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('low_risk_just_text') | safe }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('low_risk_stat_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('low_risk_stat_text') }}</span>
+                    </div>
+                </div>
+
+                <!-- MODERATE RISK -->
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem; padding: 1.5rem; border-left: 4px solid var(--warning-color); background: #fefce8; border-radius: 0 8px 8px 0;">
+                    <div
+                        style="font-weight: 700; font-size: 1.1rem; color: var(--warning-color); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        {{ t('mod_risk_title') }}
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('mod_risk_def_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('mod_risk_def_text') }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('mod_risk_just_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('mod_risk_just_text') }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('mod_risk_stat_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('mod_risk_stat_text') }}</span>
+                    </div>
+                </div>
+
+                <!-- HIGH RISK -->
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem; padding: 1.5rem; border-left: 4px solid var(--error-color); background: #fef2f2; border-radius: 0 8px 8px 0;">
+                    <div
+                        style="font-weight: 700; font-size: 1.1rem; color: var(--error-color); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        {{ t('high_risk_title') }}
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('high_risk_def_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('high_risk_def_text') }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('high_risk_just_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('high_risk_just_text') }}</span>
+                    </div>
+
+                    <div>
+                        <strong style="color: var(--text-main);">{{ t('high_risk_stat_label') }}</strong> <br>
+                        <span style="color: var(--text-muted);">{{ t('high_risk_stat_text') }}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- DISCLAIMER -->
+        <div
+            style="margin-top: 3rem; padding: 1.5rem; background-color: #f1f5f9; border-radius: var(--border-radius); border: 1px dashed var(--text-muted);">
+            <h4
+                style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                {{ t('disclaimer_title') }}
+            </h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                {{ t('disclaimer_text') }}
+            </p>
+        </div>
+
+        <a href="/calculator" class="submit-btn" style="text-align: center; text-decoration: none; margin-top: 2rem;">{{
+            t('start_calc_btn') }}</a>
+
+    </div>
+
+</div>
+{% endblock %}

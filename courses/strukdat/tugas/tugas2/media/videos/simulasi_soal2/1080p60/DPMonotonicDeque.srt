@@ -1,0 +1,124 @@
+1
+00:00:00,000 --> 00:00:03,905
+Kita akan menyelesaikan masalah Minimum Coins to Buy
+
+2
+00:00:04,005 --> 00:00:09,452
+Fruits, menggunakan Dynamic Programming dengan optimasi Monotonic Deque.
+
+3
+00:00:09,550 --> 00:00:13,818
+Aturannya sederhana. Jika kita membeli buah ke i,
+
+4
+00:00:13,918 --> 00:00:17,918
+maka kita mendapatkan i plus 1 buah berikutnya
+
+5
+00:00:18,018 --> 00:00:23,178
+secara gratis. Tujuan kita adalah meminimalkan total biaya.
+
+6
+00:00:23,266 --> 00:00:31,398
+Input yang kita gunakan adalah prices sama dengan 1, 6, 1, 2, 4.
+
+7
+00:00:31,983 --> 00:00:37,607
+Pertama, kita siapkan array prices berisi harga tiap buah, dan
+
+8
+00:00:37,707 --> 00:00:42,315
+array dp berisi 6 sel yang diinisialisasi nol. dp i
+
+9
+00:00:42,415 --> 00:00:46,931
+menyimpan biaya minimum dari index i sampai akhir.
+
+10
+00:00:47,016 --> 00:00:50,117
+Kita juga menyiapkan deque untuk menyimpan
+
+11
+00:00:50,217 --> 00:00:53,012
+kandidat index terbaik secara efisien.
+
+12
+00:00:53,100 --> 00:00:59,783
+Iterasi pertama, i sama dengan 4. Harga buah ke-4 adalah 4. Ini
+
+13
+00:00:59,883 --> 00:01:07,642
+buah terakhir, tidak ada buah gratis setelahnya. Kita masukkan index 5 ke
+
+14
+00:01:07,742 --> 00:01:12,488
+deque. dp 4 sama dengan 4 plus dp 5, yaitu 4.
+
+15
+00:01:12,583 --> 00:01:19,749
+Sekarang i sama dengan 3, harga 2. Jika beli buah ini, buah ke-4
+
+16
+00:01:19,849 --> 00:01:27,809
+gratis. Masukkan index 4 ke deque. Depan deque adalah index 5 dengan dp
+
+17
+00:01:27,909 --> 00:01:32,691
+0, jadi dp 3 sama dengan 2 plus 0, yaitu 2.
+
+18
+00:01:32,783 --> 00:01:39,170
+i sama dengan 2, harga 1. Jika beli, buah ke-3 sampai ke-4
+
+19
+00:01:39,270 --> 00:01:46,105
+gratis. Kita pop index 4 dari belakang deque karena dp 3 lebih
+
+20
+00:01:46,205 --> 00:01:52,929
+kecil dari dp 4. Masukkan index 3. Depan deque tetap index 5,
+
+21
+00:01:53,029 --> 00:01:57,403
+jadi dp 2 sama dengan 1 plus 0, yaitu 1.
+
+22
+00:01:57,500 --> 00:02:04,444
+i sama dengan 1, harga 6. Jika beli, buah ke-2 gratis. Pop index 3
+
+23
+00:02:04,544 --> 00:02:12,556
+dari belakang karena dp 2 lebih kecil. Masukkan index 2. Lalu expire index 5
+
+24
+00:02:12,656 --> 00:02:21,202
+dari depan karena sudah di luar jangkauan. Depan deque sekarang index 2 dengan dp
+
+25
+00:02:21,302 --> 00:02:25,792
+1, jadi dp 1 sama dengan 6 plus 1, yaitu 7.
+
+26
+00:02:25,883 --> 00:02:33,327
+Terakhir, i sama dengan 0, harga 1. Jika beli, buah ke-1 gratis.
+
+27
+00:02:33,427 --> 00:02:40,754
+Masukkan index 1 ke deque. Depan deque adalah index 2 dengan dp
+
+28
+00:02:40,854 --> 00:02:45,823
+1, jadi dp 0 sama dengan 1 plus 1, yaitu 2.
+
+29
+00:02:45,916 --> 00:02:53,767
+Jawaban akhirnya adalah dp 0 sama dengan 2. Strategi optimalnya: beli buah ke-0
+
+30
+00:02:53,867 --> 00:03:01,012
+dengan harga 1, dapat buah ke-1 gratis. Lalu beli buah ke-2 dengan harga
+
+31
+00:03:01,112 --> 00:03:06,648
+1, dapat buah ke-3 dan ke-4 gratis. Total biaya hanya 2.
+
