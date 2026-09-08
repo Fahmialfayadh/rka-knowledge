@@ -11,6 +11,3 @@
 
 ## Total
 32 `.py` + 12 png bukti.
-
-## Catatan
-- `__pycache__/*.pyc/*.so` tidak di-commit.

@@ -1,22 +1,14 @@
 # Data Mining
 
-> Matkul Data Mining Semester 3 (4 SKS) — tahapan, praproses, class imbalance, ensemble, association, sequential, clustering, anomali. Diperlakukan setara dengan matkul lain: lokal + vendor copy KCV.
-
-## Sumber
-- **Lokal:** `materi/Rangkuman Data Mining Week 1.pdf` (kurasi Week 1)
-- **Upstream:** [kcv-if/Modul-DM-RKA](https://github.com/kcv-if/Modul-DM-RKA) (`cfa1d6c` master)
-- **Vendor raw:** `external/Modul-DM-RKA/` (preserve original, 7 modul)
-- **Kurasi:** `courses/data-mining/modul/` (copy terstruktur)
-
-Lihat `external/ATTRIBUTION.md` & `external/Modul-DM-RKA/README.md` untuk CPMK & etika data.
+> Tahapan, praproses, class imbalance, ensemble, association, sequential, clustering, anomali.
 
 ## Struktur
 
 ```
-materi/                          # lokal
+materi/
 └── Rangkuman Data Mining Week 1.pdf
 
-modul/                           # dari Modul-DM-RKA (7 topik)
+modul/
 ├── 0 - Panduan Instalasi.pdf
 ├── 1 - EDA/                     # Eksplorasi Data (ipynb + csv)
 ├── 2 - Preprocessing/           # Praproses Data
@@ -27,7 +19,8 @@ modul/                           # dari Modul-DM-RKA (7 topik)
 └── 7 - Anomaly/                 # Deteksi Anomali
 ```
 
-## CPMK (dari README upstream)
+## Cakupan
+
 - Tahapan, karakteristik, eksplorasi & praproses data
 - Class imbalance & ensemble
 - Association rule & sequential pattern
@@ -47,16 +40,8 @@ modul/                           # dari Modul-DM-RKA (7 topik)
 | 6 | `6 - Clustering/` | `6 - Clustering (Advance).ipynb`, `Dataset_Tugas.csv` | Clustering |
 | 7 | `7 - Anomaly/` | `7 - Deteksi Anomali.ipynb` | Anomaly |
 
-## Etika Data
-Baca `external/Modul-DM-RKA/README.md` → Pernyataan Etika: gunakan dataset berlisensi/open-source, hindari dark web, patuhi PDP.
-
 ## Cara Pakai
-1. Baca `materi/Rangkuman Data Mining Week 1.pdf` (lokal)
+
+1. Baca `materi/Rangkuman Data Mining Week 1.pdf`
 2. Lanjut `modul/1 - EDA/1 - Eksplorasi Data.ipynb` → `modul/7 - Anomaly/`
 3. Install via `modul/0 - Panduan Instalasi.pdf`
-
-## Sinkronisasi
-```bash
-./scripts/sync-external.sh
-# update external/ & courses/data-mining/modul/
-```

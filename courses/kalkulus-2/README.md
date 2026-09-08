@@ -16,7 +16,7 @@ modul/         # 11 modul + EAS
 ```
 
 ## Slides
-- Tidak ada slide PPT — murni markdown + images (tidak perlu convert).
+- Tidak ada slide.
 
 ## Cara
 Buka `materi/polar.md` → `materi/volue.md` → `modul/01 … 11` berurutan; gambar di `modul/images/`.

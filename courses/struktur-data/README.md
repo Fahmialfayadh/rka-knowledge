@@ -9,6 +9,3 @@
 - `tugas/tugas3/` — `queue_soal1-3.py`, `stack_soal1-3.py`, `stack_soal1diy.py`
 - `tugas/tugas4/` — `soal1.py`, `soal1_dfs.py`, `soal2-3.py`
 - `assets/audio1053355768.m4a` (33M) — LFS
-
-## Catatan
-- `media/videos` masif (95M) — LFS; `__pycache__` tidak di-commit.

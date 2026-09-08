@@ -1,14 +1,6 @@
 # Machine Learning
 
-> Kurikulum ML RKA — vendor copy dari [kcv-if/Modul-ML-RKA](https://github.com/kcv-if/Modul-ML-RKA) (`46e0089` main), diperlakukan setara dengan matkul lain (bukan sekadar `external/`).
-
-## Sumber
-- **Upstream:** https://github.com/kcv-if/Modul-ML-RKA
-- **Snapshot:** `46e0089` — "add knn image" (2026-09-07)
-- **Vendor raw:** `external/Modul-ML-RKA/` (preserve original)
-- **Kurasi:** `courses/machine-learning/materi/` (copy terstruktur, siap baca)
-
-Lihat `external/ATTRIBUTION.md` untuk lisensi.
+> Supervised, unsupervised, deep learning, reinforcement learning, deployment.
 
 ## Struktur
 
@@ -37,10 +29,5 @@ materi/
 - `Reinforcement Learning/RL.md`, `Deployment/deployment.md`
 
 ## Cara Pakai
-Buka `materi/<Topik>/README.md` lalu lanjut ke `*.md` per algoritma. Tiap modul berisi penjelasan konseptual + implementasi Python + contoh kasus.
 
-## Sinkronisasi
-```bash
-./scripts/sync-external.sh
-# otomatis update external/ dan courses/machine-learning/materi/
-```
+Buka `materi/<Topik>/README.md` lalu lanjut ke `*.md` per algoritma. Tiap modul berisi penjelasan konseptual + implementasi Python + contoh kasus.

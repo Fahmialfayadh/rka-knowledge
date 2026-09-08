@@ -11,6 +11,3 @@ cd projects/studenttracker
 pip install django
 python manage.py runserver # http://127.0.0.1:8000
 ```
-
-## Catatan
-- `*.lck` & `__pycache__` tidak di-commit.
