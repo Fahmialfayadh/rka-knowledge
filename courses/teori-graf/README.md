@@ -14,10 +14,12 @@
 | `slides/pdf/vision-board-1-0-final.pdf` | `vision_board_1.0_final.pptx` |
 
 ## Materi
-- `materi/FP_Tegraf.py` (33K), `generate_final_dashboard.py`, `generate_rt_only_pyvis.py`, `extract_cluster_stats.py`, `HeFDN_Analysis (1).pdf`, `viewer.html`, `source_code.txt` (link GitHub DE-sample)
-- `materi/graph_theory/` — `fundamental_graph.py`
+- `materi/HeFDN_Analysis (1).pdf` — analisis HeFDN
 - `docs/` — `rangkuman.md`, `laporan_presentasi.md`, `hasil.md`, `cluster_stats.md`, `perubahan.md`, `notepresentasi.md`, `presentation.md`
 - `data/DE-sample-X-capres2024/` — `cleaned_data.csv`, `relation.csv`, `cluster_density_report.csv`, `data-twit-{prabowo,ganjar,anies}.json`, `visualisasi_*.html`
+
+## Project
+- `projects/finalproject/` — project utuh (bukan materi): `FP_Tegraf.py`, `generate_final_dashboard.py`, `generate_rt_only_pyvis.py`, `extract_cluster_stats.py`, `graph_theory/fundamental_graph.py`, `source_code.txt`
 
 ## Praktikum
 - `praktikum/modul2/modul-latihan-2-shortest-path-mst-graph-Fahmialfayadh/` — `tugas1.ipynb`, `tugas2.ipynb`

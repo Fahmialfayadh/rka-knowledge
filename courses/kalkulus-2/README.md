@@ -5,16 +5,14 @@
 ## Struktur
 
 ```
-materi/        # 2 modul utama
-├── polar.md   # 20K — Koordinat Polar (9.6-9.8) + cheat sheet
-└── volue.md   # 13K — Volume polar & tata cara gambar grafik
+materi/
+├── polar.md   # Koordinat Polar (9.6-9.8)
+└── volue.md   # Volume polar & tata cara gambar grafik
 
 modul/         # 11 modul + EAS
 ├── 01_luas_antara_dua_kurva.md … 11_deret_tak_hingga.md
 ├── kumpulan_rumus_eas.md + latihan_soal_eas.md
 └── images/    # 20 png
-
-generate_assets.py  # generator gambar (scratch)
 ```
 
 ## Slides

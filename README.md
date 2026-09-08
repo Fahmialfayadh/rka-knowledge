@@ -39,12 +39,13 @@ Tiap `courses/<slug>/` baku:
 ```
 courses/<slug>/
 ├── README.md
-├── slides/pdf/          # PDF hasil konvert (kebab-case) — hanya jika ada slide
-├── materi/              # modul lokal (pdf/md)
-├── modul/               # khusus kalkulus / data-mining / machine-learning (dari external)
-├── praktikum/ | tugas/ | projects/
-└── assets/              # hanya jika ada media (tidak ada empty folder)
+├── slides/pdf/          # PDF hasil konvert — hanya jika ada slide
+├── materi/ | modul/      # bahan ajar (pdf/md)
+├── tugas/ | praktikum/ | projects/  # project/tugas — bukan materi
+└── assets/              # hanya jika ada media
 ```
+
+> **Aturan:** `projects/` = project utuh (script stay di dalam project, bukan di `materi/`). `materi/`/`modul/` hanya bahan ajar.
 
 > Empty folder sudah di-prune — repo tidak menyimpan `assets/` kosong.
 
@@ -65,7 +66,7 @@ courses/<slug>/
 | 11 | `perancangan-dan-analisis-algoritma` | Perancangan dan Analisis Algoritma | Portofolio `docx→pdf` | [`perancangan-dan-analisis-algoritma/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf`](courses/perancangan-dan-analisis-algoritma/slides/pdf/portofolio-perancangan-dan-analisis-algoritma.pdf) |
 | 12 | `probabilitas-dan-statistika` | Probabilitas dan Statistika | `slides/pdf/{uji-parameter-1-populasi,uji-hipotesis-2-populasi,one-way-anova}`, `tabel/{F0-05,T,Z}` | ✓ 3 pdf |
 | 13 | `struktur-data` | Struktur Data | `tugas/{sandbox,tugas1-4}`, `assets/audio1053355768.m4a` 33M, `tugas2/media` (95M) | — |
-| 14 | `teori-graf` | Teori Graf | `materi/{FP_Tegraf.py,HeFDN_Analysis.pdf}`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`teori-graf/slides/pdf/`](courses/teori-graf/slides/pdf/) (7 pdf) |
+| 14 | `teori-graf` | Teori Graf | `projects/finalproject/{FP_Tegraf.py,generate_*.py,graph_theory}`, `materi/HeFDN_Analysis.pdf`, `docs/` (7 md), `data/DE-sample-X-capres2024`, `praktikum/{modul2,terminologigraf}` | [`teori-graf/slides/pdf/`](courses/teori-graf/slides/pdf/) (7 pdf) |
 
 Detail per-course: buka `courses/<slug>/README.md`.
 

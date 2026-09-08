@@ -56,3 +56,5 @@ instance/
 scripts/
 docs/
 external/
+# Kalkulus helper script (bukan materi)
+courses/kalkulus-2/generate_assets.py
