@@ -1,0 +1,3 @@
+[submodule "courses/machine-learning/praktikum"]
+	path = courses/machine-learning/praktikum
+	url = https://github.com/Fahmialfayadh/praktikum-ml.git
