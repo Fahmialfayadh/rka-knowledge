@@ -58,3 +58,8 @@ docs/
 external/
 # Kalkulus helper script (bukan materi)
 courses/kalkulus-2/generate_assets.py
+
+# Matkul tanpa materi (hanya proyek/konten tidak relevan)
+courses/matematika-diskrit/
+courses/aljabar-linear/
+courses/basis-data/
